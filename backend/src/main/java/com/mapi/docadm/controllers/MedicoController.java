@@ -30,7 +30,7 @@ import com.mapi.docadm.services.MedicoService;
 public class MedicoController {
 
 	@Autowired
-	private MedicoService service;
+	private MedicoService service;	
 
 	@GetMapping
 	public ResponseEntity<Page<MedicoDto>> findAll(
@@ -43,6 +43,22 @@ public class MedicoController {
 				
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		Page<MedicoDto> list = service.findAllPaged(pageRequest, especialidadeId, nome.trim());
+		
+		return ResponseEntity.ok().body(list);
+
+	}
+	
+	@GetMapping("/pesq-especializacao")
+	public ResponseEntity<Page<MedicoDto>> findAllEspecializacao(
+			@RequestParam(value = "especializacaoId", defaultValue = "0") Long especializacaoId,
+			@RequestParam(value = "nome", defaultValue = "") String nome,
+			@RequestParam(value = "page", defaultValue = "0") Integer page,
+			@RequestParam(value = "linesPerPage", defaultValue = "12") Integer linesPerPage,
+			@RequestParam(value = "direction", defaultValue = "ASC") String direction,
+			@RequestParam(value = "orderBy", defaultValue = "nome") String orderBy) {
+				
+		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
+		Page<MedicoDto> list = service.findAllPagedEspecializacao(pageRequest, especializacaoId, nome.trim());
 		
 		return ResponseEntity.ok().body(list);
 

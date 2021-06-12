@@ -51,6 +51,14 @@ public class MedicoService {
 	}
 	
 	@Transactional(readOnly = true)
+	public Page<MedicoDto> findAllPagedEspecializacao(PageRequest pageRequest, Long especializacaoId, String nome) {
+		List<Especializacao> especializacoes = (especializacaoId == 0) ? null : Arrays.asList(especializacaoRepository.getOne(especializacaoId));
+		Page<Medico> page = repository.findEspecializacoes(especializacoes, nome, pageRequest);
+		repository.findEspecializacoes(page.toList());
+		return page.map(x -> new MedicoDto(x, x.getEspecializacoes(), x.getEspecialidades()));
+	}
+	
+	@Transactional(readOnly = true)
 	public MedicoDto findById(Long id) {
 		Optional<Medico> optional = repository.findById(id);
 		Medico entity = optional.orElseThrow(() -> new EntidadeNaoEncontradaException("Médico não encontrado!"));

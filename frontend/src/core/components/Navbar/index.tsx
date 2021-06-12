@@ -21,6 +21,10 @@ const Navbar = () => {
         <nav className="row bg-primary main-nav">
             <div className="col-3">
                 <Link to="/" className="nav-logo-text">
+                    <img 
+                    src="https://doc-admin-jacomo.s3.sa-east-1.amazonaws.com/logo.png" 
+                    alt="Foto"
+                    className="navbar-logo" />
                     <h4>DocAdmin</h4>
                 </Link>
             </div>

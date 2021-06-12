@@ -13,11 +13,14 @@ const Admin = () => (
                 <PrivateRoute path="/admin/medicos">
                     <Medicos />
                 </PrivateRoute>
-                <PrivateRoute path="/admin/especialidade">
-                    <h1>Especialidades</h1>
+                <PrivateRoute path="/admin/busca-especializacao">
+                    <Medicos />
                 </PrivateRoute>
-                <PrivateRoute path="/admin/especializacao">
-                    <h1>Especializações</h1>
+                <PrivateRoute path="/admin/busca-atendimento">
+                    <h1>Horário de Atendimento</h1>
+                </PrivateRoute>
+                <PrivateRoute path="/admin/busca-cidade">
+                    <h1>Cidades</h1>
                 </PrivateRoute>
                 <PrivateRoute path="/admin/users" allowedRoutes={['ROLE_ADMIN']}>
                     <h1>Users</h1>

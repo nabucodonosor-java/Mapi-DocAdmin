@@ -5,7 +5,7 @@ import { makePrivateRequest } from 'core/utils/request';
 import MedicoCard from './components/MedicoCard';
 import MedicoCardLoader from './components/Loaders/MedicoCardLoader';
 import Pagination from 'core/components/Pagination';
-import MedicoFilters from 'core/components/MedicosFilters';
+import MedicoFilters from 'core/components/Filters/MedicosFilters';
 import './styles.scss';
 
 const Catalog = () => {

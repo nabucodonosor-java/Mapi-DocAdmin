@@ -1,37 +1,35 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { Especialidade, MedicoResponse } from 'core/types/Medico';
-import { useHistory } from 'react-router-dom';
+import { Especializacao, MedicoResponse } from 'core/types/Medico';
 import { makePrivateRequest } from 'core/utils/request';
 import { toast } from 'react-toastify';
 import CardLoader from '../Loaders/MedicoCardLoader';
 import Card from '../Card';
 import Pagination from 'core/components/Pagination';
-import MedicosFilters  from 'core/components/Filters/MedicosFilters';
+import EspecializacaoFilters from 'core/components/Filters/EspecializacaoFilters';
 
-const List = () => {
+const ListEspecializacao = () => {
     const [medicoResponse, setMedicoResponse] = useState<MedicoResponse>();
     const [isLoading, setIsLoading] = useState(false);
     const [activePage, setActivePage] = useState(0);
-    const history = useHistory();
     const [nome, setNome] = useState('');
-    const [especialidade, setEspecialidade] = useState<Especialidade>();
+    const [especializacao, setEspecializacao] = useState<Especializacao>();
 
     const getMedicos = useCallback(() => {
         const params = {
             page: activePage,
             linesPerPage: 20,
-            direction: 'DESC',
-            orderBy: 'id',
+            direction: 'ASC',
+            orderBy: 'nome',
             nome,
-            especialidadeId: especialidade?.id
+            especializacaoId: especializacao?.id
         }
         setIsLoading(true);
-        makePrivateRequest({ url: '/medicos', params })
+        makePrivateRequest({ url: '/medicos/pesq-especializacao', params })
        .then(response => setMedicoResponse(response.data))
        .finally(() => {
         setIsLoading(false);
        })
-    }, [activePage, nome, especialidade]);
+    }, [activePage, nome, especializacao]);
 
     useEffect(() => {
         getMedicos();    
@@ -42,19 +40,15 @@ const List = () => {
         setNome(name);
     }
 
-    const handleChangeEspecialidade = (especialidade: Especialidade) => {
+    const handleChangeEspecializacao = (especializacao: Especializacao) => {
         setActivePage(0);
-        setEspecialidade(especialidade);
+        setEspecializacao(especializacao);
     }
 
     const clearFilters = () => {
         setActivePage(0);
-        setEspecialidade(undefined);
+        setEspecializacao(undefined);
         setNome('');
-    }
-
-    const handleCreate = () => { 
-        history.push('/admin/medicos/create'); 
     }
 
     const onRemove = (medicoId: number) => {
@@ -75,13 +69,10 @@ const List = () => {
     return (
         <div>
             <div className="d-flex justify-content-between">
-                <button className="btn btn-primary btn-lg mr-5" onClick={handleCreate}>
-                    ADICIONAR
-                </button>
-                <MedicosFilters
+                <EspecializacaoFilters
                     nome={nome}
-                    especialidade={especialidade}
-                    handleChangeEspecialidade={handleChangeEspecialidade}
+                    especializacao={especializacao}
+                    handleChangeEspecializacao={handleChangeEspecializacao}
                     handleChangeName={handleChangeName}
                     clearFilters={clearFilters}
                     />
@@ -105,4 +96,4 @@ const List = () => {
     )
 }
 
-export default List;
+export default ListEspecializacao;

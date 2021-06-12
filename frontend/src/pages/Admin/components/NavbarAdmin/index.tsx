@@ -12,13 +12,18 @@ const NavbarAdmin = () => (
                 </NavLink>
             </li>
             <li>
-                <NavLink to="/admin/especialidade" className="admin-nav-admin-item">
-                    Especialidades Médicas
+                <NavLink to="/admin/busca-especializacao" className="admin-nav-admin-item">
+                    Busca Médico por Especializações
                 </NavLink>
             </li>
             <li>
-                <NavLink to="/admin/especializacao" className="admin-nav-admin-item">
-                    Especializações Médicas
+                <NavLink to="/admin/busca-atendimento" className="admin-nav-admin-item">
+                    Busca Médico por Horário de Atendimento
+                </NavLink>
+            </li>
+            <li>
+                <NavLink to="/admin/busca-cidade" className="admin-nav-admin-item">
+                    Busca Médico por Cidade
                 </NavLink>
             </li>
             {isAllowebByRole(['ROLE_ADMIN']) && (

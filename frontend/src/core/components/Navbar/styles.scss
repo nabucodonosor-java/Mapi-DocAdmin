@@ -10,15 +10,22 @@
 
 .nav-logo-text {
     color: #FFF;
+    display: flex;
+    align-items: center;
+}
+
+.navbar-logo {
+    width: 40px;
+    margin-right: 10px;
 }
 
 .main-menu {
     display: flex;
     justify-content: center;
 
-    li:nth-child(2) {
-        margin-right: 85px;
-        margin-left: 85px;
+    li {
+        margin-right: 15px;
+        margin-left: 15px;
     }    
 }
 
