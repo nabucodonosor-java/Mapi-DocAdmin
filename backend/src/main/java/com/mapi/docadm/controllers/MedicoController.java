@@ -34,7 +34,7 @@ public class MedicoController {
 
 	@GetMapping
 	public ResponseEntity<Page<MedicoDto>> findAll(
-			@RequestParam(value = "especializacaoId", defaultValue = "0") Long especializacaoId,
+			@RequestParam(value = "especialidadeId", defaultValue = "0") Long especialidadeId,
 			@RequestParam(value = "nome", defaultValue = "") String nome,
 			@RequestParam(value = "page", defaultValue = "0") Integer page,
 			@RequestParam(value = "linesPerPage", defaultValue = "12") Integer linesPerPage,
@@ -42,7 +42,7 @@ public class MedicoController {
 			@RequestParam(value = "orderBy", defaultValue = "nome") String orderBy) {
 				
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
-		Page<MedicoDto> list = service.findAllPaged(pageRequest, especializacaoId, nome.trim());
+		Page<MedicoDto> list = service.findAllPaged(pageRequest, especialidadeId, nome.trim());
 		
 		return ResponseEntity.ok().body(list);
 

@@ -43,9 +43,9 @@ public class MedicoService {
 	private EspecialidadeRepository especialidadeRepository;
 	
 	@Transactional(readOnly = true)
-	public Page<MedicoDto> findAllPaged(PageRequest pageRequest, Long especializacaoId, String nome) {
-		List<Especializacao> especializacoes = (especializacaoId == 0) ? null : Arrays.asList(especializacaoRepository.getOne(especializacaoId));
-		Page<Medico> page = repository.find(especializacoes, nome, pageRequest);
+	public Page<MedicoDto> findAllPaged(PageRequest pageRequest, Long especialidadeId, String nome) {
+		List<Especialidade> especialidades = (especialidadeId == 0) ? null : Arrays.asList(especialidadeRepository.getOne(especialidadeId));
+		Page<Medico> page = repository.find(especialidades, nome, pageRequest);
 		repository.find(page.toList());
 		return page.map(x -> new MedicoDto(x, x.getEspecializacoes(), x.getEspecialidades()));
 	}

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { ReactComponent as SearchIcon } from 'core/assets/images/lupa.svg';
-import { Especializacao } from 'core/types/Medico';
+import { Especialidade } from 'core/types/Medico';
 import { makePrivateRequest } from 'core/utils/request';
 import Select from 'react-select';
 import './styles.scss';
@@ -8,21 +8,21 @@ import './styles.scss';
 type Props = {
     nome?: string;
     handleChangeName: (nome: string) => void;
-    handleChangeEspecializacao: (especializacao: Especializacao) => void;
+    handleChangeEspecialidade: (especialidade: Especialidade) => void;
     clearFilters: () => void;
-    especializacao?: Especializacao; 
+    especialidade?: Especialidade; 
 }
 
-const MedicoFilters = ({ nome, handleChangeName, especializacao, handleChangeEspecializacao, clearFilters }: Props) => {
+const MedicoFilters = ({ nome, handleChangeName, especialidade, handleChangeEspecialidade, clearFilters }: Props) => {
 
-    const [isLoadingEspecializacao, setIsLoadingEspecializacao] = useState(false);
-    const [especializacoes, setEspecializacoes] = useState<Especializacao[]>([]);
+    const [isLoadingEspecialidade, setIsLoadingEspecialidade] = useState(false);
+    const [especialidades, setEspecialidades] = useState<Especialidade[]>([]);
 
     useEffect(() => { 
-        setIsLoadingEspecializacao(true);
-        makePrivateRequest({ url: '/especializacao' })
-            .then(response => setEspecializacoes(response.data.content))
-            .finally(() => setIsLoadingEspecializacao(false));
+        setIsLoadingEspecialidade(true);
+        makePrivateRequest({ url: '/especialidade' })
+            .then(response => setEspecialidades(response.data.content))
+            .finally(() => setIsLoadingEspecialidade(false));
     }, []);  
 
     return (
@@ -38,18 +38,18 @@ const MedicoFilters = ({ nome, handleChangeName, especializacao, handleChangeEsp
                 <SearchIcon />
             </div>
             <Select
-                name="especializacoes"
-                key={`select-${especializacao?.id}`}
-                value={especializacao}
-                isLoading={isLoadingEspecializacao}
-                options={especializacoes}
-                getOptionLabel={(option: Especializacao) => option.nome}
-                getOptionValue={(option: Especializacao) => String(option.id)}
+                name="especialidades"
+                key={`select-${especialidade?.id}`}
+                value={especialidade}
+                isLoading={isLoadingEspecialidade}
+                options={especialidades}
+                getOptionLabel={(option: Especialidade) => option.nome}
+                getOptionValue={(option: Especialidade) => String(option.id)}
                 className="filter-select-container"
                 classNamePrefix="medico-especializacoes-select"
-                placeholder="Especializações"
-                inputId="especializacoes"
-                onChange={value => handleChangeEspecializacao(value as Especializacao)}
+                placeholder="Pesquisar por Especialidade"
+                inputId="especialidades"
+                onChange={value => handleChangeEspecialidade(value as Especialidade)}
                 isClearable
             />
             <button 

@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { Especializacao, MedicoResponse } from 'core/types/Medico';
+import { Especialidade, MedicoResponse } from 'core/types/Medico';
 import { useHistory } from 'react-router-dom';
 import { makePrivateRequest } from 'core/utils/request';
 import { toast } from 'react-toastify';
@@ -14,7 +14,7 @@ const List = () => {
     const [activePage, setActivePage] = useState(0);
     const history = useHistory();
     const [nome, setNome] = useState('');
-    const [especializacao, setEspecializacao] = useState<Especializacao>();
+    const [especialidade, setEspecialidade] = useState<Especialidade>();
 
     const getMedicos = useCallback(() => {
         const params = {
@@ -23,7 +23,7 @@ const List = () => {
             direction: 'DESC',
             orderBy: 'id',
             nome,
-            especializacaoId: especializacao?.id
+            especialidadeId: especialidade?.id
         }
         setIsLoading(true);
         makePrivateRequest({ url: '/medicos', params })
@@ -31,7 +31,7 @@ const List = () => {
        .finally(() => {
         setIsLoading(false);
        })
-    }, [activePage, nome, especializacao]);
+    }, [activePage, nome, especialidade]);
 
     useEffect(() => {
         getMedicos();    
@@ -42,14 +42,14 @@ const List = () => {
         setNome(name);
     }
 
-    const handleChangeEspecializacao = (especializacao: Especializacao) => {
+    const handleChangeEspecialidade = (especialidade: Especialidade) => {
         setActivePage(0);
-        setEspecializacao(especializacao);
+        setEspecialidade(especialidade);
     }
 
     const clearFilters = () => {
         setActivePage(0);
-        setEspecializacao(undefined);
+        setEspecialidade(undefined);
         setNome('');
     }
 
@@ -80,8 +80,8 @@ const List = () => {
                 </button>
                 <MedicosFilters
                     nome={nome}
-                    especializacao={especializacao}
-                    handleChangeEspecializacao={handleChangeEspecializacao}
+                    especialidade={especialidade}
+                    handleChangeEspecialidade={handleChangeEspecialidade}
                     handleChangeName={handleChangeName}
                     clearFilters={clearFilters}
                     />

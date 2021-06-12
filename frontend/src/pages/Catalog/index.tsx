@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Especializacao, MedicoResponse } from 'core/types/Medico';
+import { Especialidade, MedicoResponse } from 'core/types/Medico';
 import { makePrivateRequest } from 'core/utils/request';
 import MedicoCard from './components/MedicoCard';
 import MedicoCardLoader from './components/Loaders/MedicoCardLoader';
@@ -14,14 +14,14 @@ const Catalog = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [activePage, setActivePage] = useState(0);
     const [nome, setNome] = useState('');
-    const [especializacao, setEspecializacao] = useState<Especializacao>();
+    const [especialidade, setEspecialidade] = useState<Especialidade>();
 
     const getMedicos = useCallback(() => {
         const params = {
             page: activePage,
             linesPerPage: 15,
             nome,
-            especializacaoId: especializacao?.id
+            especialidadeId: especialidade?.id
         }
 
         setIsLoading(true);
@@ -30,7 +30,7 @@ const Catalog = () => {
        .finally(() => {
         setIsLoading(false);
        })
-    }, [activePage, nome, especializacao]);
+    }, [activePage, nome, especialidade]);
 
     useEffect(() => {
         getMedicos();
@@ -41,27 +41,25 @@ const Catalog = () => {
         setNome(name);
     }
 
-    const handleChangeEspecializacao = (especializacao: Especializacao) => {
+    const handleChangeEspecialidade = (especialidade: Especialidade) => {
         setActivePage(0);
-        setEspecializacao(especializacao);
+        setEspecialidade(especialidade);
     }
 
     const clearFilters = () => {
         setActivePage(0);
-        setEspecializacao(undefined);
+        setEspecialidade(undefined);
         setNome('');
     }
 
     return (
         <div className="catalog-container">
             <div className="d-flex justify-content-between">
-                <h1 className="catalog-title">
-                    Catálogo de Médicos(as)
-                </h1>
+               
                 <MedicoFilters
                     nome={nome}
-                    especializacao={especializacao}
-                    handleChangeEspecializacao={handleChangeEspecializacao}
+                    especialidade={especialidade}
+                    handleChangeEspecialidade={handleChangeEspecialidade}
                     handleChangeName={handleChangeName}
                     clearFilters={clearFilters}
                     />
