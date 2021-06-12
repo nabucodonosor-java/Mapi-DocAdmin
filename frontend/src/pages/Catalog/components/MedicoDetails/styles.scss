@@ -1,0 +1,89 @@
+.medico-details-container {
+    margin-top: 40px;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+.medico-details {
+  padding: 50px 60px 90px 60px;
+}
+
+.medico-details-goback {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+.medico-details-icon-goback {
+  color: #4076FF;
+  transform: rotate(-180deg);
+  margin-right: 30px;
+}
+
+.medico-details-text-goback {
+  font-size: 24px;
+  line-height: 33px;
+  letter-spacing: -0.015em;
+  color: #263238;
+  text-transform: uppercase;
+}
+
+.medico-details-card {
+  border: 1px solid #E1E1E1;
+  border-radius: 20px;
+  padding: 38px 29px;
+}
+
+.medico-details-image {
+  width: 343px;
+  height: 353px;
+}
+
+.medico-details-name {
+    font-size: 36px;
+    line-height: 49px;
+    letter-spacing: -0.015em;
+    margin-top: 35px;
+    text-align: center;
+}
+
+.medico-details-specialty {
+  font-size: 20px;
+  line-height: 49px;
+  letter-spacing: -0.015em;
+  text-align: center;
+  color: #2d769a;
+}
+
+.medico-details-specialty-title {
+  font-size: 30px;
+  line-height: 49px;
+  letter-spacing: -0.015em;
+  text-align: center;
+  color: #2d769a;
+}
+
+.medico-details-info {
+  padding: 40px 20px 40px 20px;
+}
+
+.medico-details-info-title {
+  font-size: 22px;
+}
+
+.medico-details-atendimento-title {
+  font-size: 24px;
+  line-height: 33px;
+  letter-spacing: -0.015em;
+  color: #263238;
+  margin-bottom: 25px;
+}
+
+.medico-details-atendimento-text {
+  font-size: 18px;
+  line-height: 25px;
+  letter-spacing: -0.015em;
+  color: #9E9E9E;
+}
+
+

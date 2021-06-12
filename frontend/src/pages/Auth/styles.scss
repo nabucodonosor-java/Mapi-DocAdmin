@@ -1,0 +1,24 @@
+.auth-container {
+    display: flex;
+    padding: 40px 40px 100px 0;
+    justify-content: center;
+    background: url(~core/assets/images/background-login.svg) no-repeat;
+    background-size: 100%;
+}
+
+.auth-info-title {
+    font-size: 55px;
+    line-height: 75px;
+    letter-spacing: -0.015em;
+    color: #263238;
+    margin-top: 30px;
+}
+
+.auth-info-subtile {
+    margin-top: 25px;
+    margin-bottom: 15px;
+    font-size: 24px;
+    line-height: 33px;
+    letter-spacing: -0.015em;
+    color: #9E9E9E;
+}
