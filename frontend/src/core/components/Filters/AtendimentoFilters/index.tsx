@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { ReactComponent as SearchIcon } from 'core/assets/images/lupa.svg';
 import { Atendimento } from 'core/types/Medico';
+import { ReactComponent as SearchIcon } from 'core/assets/images/lupa.svg';
 import { makePrivateRequest } from 'core/utils/request';
 import Select from 'react-select';
 import './styles.scss';
@@ -13,7 +13,7 @@ type Props = {
     atendimento?: Atendimento; 
 }
 
-const AtendimentoFilters = ({ nome, handleChangeName, atendimento, handleChangeAtendimento, clearFilters }: Props) => {
+const AtendimentosFilters = ({ nome, handleChangeName, atendimento, handleChangeAtendimento, clearFilters }: Props) => {
 
     const [isLoadingAtendimento, setIsLoadingAtendimento] = useState(false);
     const [atendimentos, setAtendimentos] = useState<Atendimento[]>([]);
@@ -47,7 +47,7 @@ const AtendimentoFilters = ({ nome, handleChangeName, atendimento, handleChangeA
                 getOptionValue={(option: Atendimento) => String(option.id)}
                 className="filter-select-container"
                 classNamePrefix="medico-especializacoes-select"
-                placeholder="Pesquisar por Dias de Atendimento"
+                placeholder="Pesquisar por Atendimento"
                 inputId="atendimentos"
                 onChange={value => handleChangeAtendimento(value as Atendimento)}
                 isClearable
@@ -62,4 +62,4 @@ const AtendimentoFilters = ({ nome, handleChangeName, atendimento, handleChangeA
     )
 }
 
-export default AtendimentoFilters;
+export default AtendimentosFilters;

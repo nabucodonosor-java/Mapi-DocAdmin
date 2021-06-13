@@ -8,8 +8,6 @@ import Auth from 'pages/Auth';
 import Admin from './pages/Admin';
 import history from './core/utils/history';
 
-
-
 const Routes = () => (
     <Router history={history}>
     <Navbar />

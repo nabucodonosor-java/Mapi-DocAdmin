@@ -5,9 +5,9 @@ import { toast } from 'react-toastify';
 import CardLoader from '../Loaders/MedicoCardLoader';
 import Card from '../Card';
 import Pagination from 'core/components/Pagination';
-import AtendimentoFilters from 'core/components/Filters/AtendimentoFilters';
+import AtendimentosFilters from 'core/components/Filters/AtendimentoFilters';
 
-const ListAtendimento = () => {
+const ListAtendimentos = () => {
     const [medicoResponse, setMedicoResponse] = useState<MedicoResponse>();
     const [isLoading, setIsLoading] = useState(false);
     const [activePage, setActivePage] = useState(0);
@@ -21,7 +21,7 @@ const ListAtendimento = () => {
             direction: 'ASC',
             orderBy: 'nome',
             nome,
-            atendimento: atendimento?.id
+            atendimentoId: atendimento?.id
         }
         setIsLoading(true);
         makePrivateRequest({ url: '/medicos/atendimento', params })
@@ -69,7 +69,7 @@ const ListAtendimento = () => {
     return (
         <div>
             <div className="d-flex justify-content-between">
-                <AtendimentoFilters
+                <AtendimentosFilters
                     nome={nome}
                     atendimento={atendimento}
                     handleChangeAtendimento={handleChangeAtendimento}
@@ -96,4 +96,4 @@ const ListAtendimento = () => {
     )
 }
 
-export default ListAtendimento;
+export default ListAtendimentos;

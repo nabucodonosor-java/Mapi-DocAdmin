@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.mapi.docadm.dto.AtendimentoDto;
 import com.mapi.docadm.dto.EspecialidadeDto;
 import com.mapi.docadm.dto.EspecializacaoDto;
 import com.mapi.docadm.dto.MedicoDto;
@@ -64,10 +65,10 @@ public class MedicoService {
 	}
 	
 	@Transactional(readOnly = true)
-	public Page<MedicoDto> findAllPagedAtendimento(PageRequest pageRequest, Long atendimentoId, String nome) {
+	public Page<MedicoDto> findAllPagedAtendimentos(PageRequest pageRequest, Long atendimentoId, String nome) {
 		List<Atendimento> atendimentos = (atendimentoId == 0) ? null : Arrays.asList(atendimentoRepository.getOne(atendimentoId));
-		Page<Medico> page = repository.findAtendimento(atendimentos, nome, pageRequest);
-		repository.findAtendimento(page.toList());
+		Page<Medico> page = repository.findAtendimentos(atendimentos, nome, pageRequest);
+		repository.findAtendimentos(page.toList());
 		return page.map(x -> new MedicoDto(x, x.getEspecializacoes(), x.getEspecialidades(), x.getAtendimentos()));
 	}
 	
@@ -128,6 +129,7 @@ public class MedicoService {
 		
 		entity.getEspecializacoes().clear();
 		entity.getEspecialidades().clear();
+		entity.getAtendimentos().clear();
 		
 		for (EspecializacaoDto especializacaoDto : dto.getEspecializacoes()) {
 			Especializacao especializacao = especializacaoRepository.getOne(especializacaoDto.getId());
@@ -137,6 +139,11 @@ public class MedicoService {
 		for (EspecialidadeDto especialidadeDto : dto.getEspecialidades()) {
 			Especialidade especialidade = especialidadeRepository.getOne(especialidadeDto.getId());
 			entity.getEspecialidades().add(especialidade);
+		}
+		
+		for (AtendimentoDto atendDto : dto.getAtendimentos()) {
+			Atendimento atendimento = atendimentoRepository.getOne(atendDto.getId());
+			entity.getAtendimentos().add(atendimento);
 		}
 	}
 	
