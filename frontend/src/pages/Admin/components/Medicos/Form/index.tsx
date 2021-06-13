@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Especialidade, Especializacao } from 'core/types/Medico';
+import { Atendimento, Especialidade, Especializacao } from 'core/types/Medico';
 import './styles.scss';
 import { Controller, useForm } from 'react-hook-form';
 import { useHistory, useParams } from 'react-router';
@@ -22,6 +22,7 @@ export type FormState = {
     horarioAtendimento: string;
     especializacoes: Especializacao[];
     especialidades: Especialidade[];
+    atendimentos: Atendimento[];
 }
 
 type ParamsType = {
@@ -36,6 +37,8 @@ const Form = () => {
     const [especializacoes, setEspecializacoes] = useState<Especializacao[]>([]);
     const [isLoadingEspecialidades, setIsLoadingEspecialidades] = useState(false);
     const [especialidades, setEspecialidades] = useState<Especializacao[]>([]);
+    const [isLoadingAtendimentos, setIsLoadingAtendimentos] = useState(false);
+    const [atendimentos, setAtendimentos] = useState<Atendimento[]>([]);
     const [uploadedImgUrl, setUploadedImgUrl] = useState('');
     const [medicoImgUrl, setMedicoImgUrl] = useState('');
     const isEditing = medicoId !== 'create';
@@ -53,6 +56,7 @@ const Form = () => {
             setValue('curriculo', response.data.curriculo);
             setValue('horarioAtendimento', response.data.horarioAtendimento);
             setValue('especializacoes', response.data.especializacoes);
+            setValue('atendimentos', response.data.atendimentos);
 
             setMedicoImgUrl(response.data.imgUrl);
         })
@@ -71,6 +75,13 @@ const Form = () => {
         makePrivateRequest({ url: '/especializacao' })
             .then(response => setEspecializacoes(response.data.content))
             .finally(() => setIsLoadingEspecializacoes(false));
+    }, []);
+
+    useEffect(() => {
+        setIsLoadingAtendimentos(true);
+        makePrivateRequest({ url: '/atendimento' })
+            .then(response => setAtendimentos(response.data.content))
+            .finally(() => setIsLoadingAtendimentos(false));
     }, []);
 
     const onSubmit = (data: FormState) => {
@@ -205,6 +216,22 @@ const Form = () => {
 
                     </div>
                     <div className="col-6 medicos-descricoes">
+                            <Controller
+                                as={Select}
+                                name="atendimentos"
+                                rules={{ required: false }}
+                                control={control}
+                                isLoading={isLoadingAtendimentos}
+                                options={atendimentos}
+                                getOptionLabel={(option: Atendimento) => option.nome}
+                                getOptionValue={(option: Atendimento) => String(option.id)}
+                                classNamePrefix="especializacoes-select"
+                                className="input-select mr-2"
+                                placeholder="Dias e Períodos de Atendimento"
+                                inputId="atendimentos"
+                                defaultValue=""
+                                isMulti
+                                />
                         <label>Observações</label>
                         <textarea
                         ref={register({ required: false})}

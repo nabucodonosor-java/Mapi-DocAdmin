@@ -1,18 +1,18 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { Especializacao, MedicoResponse } from 'core/types/Medico';
+import { Atendimento, MedicoResponse } from 'core/types/Medico';
 import { makePrivateRequest } from 'core/utils/request';
 import { toast } from 'react-toastify';
 import CardLoader from '../Loaders/MedicoCardLoader';
 import Card from '../Card';
 import Pagination from 'core/components/Pagination';
-import EspecializacaoFilters from 'core/components/Filters/EspecializacaoFilters';
+import AtendimentoFilters from 'core/components/Filters/AtendimentoFilters';
 
-const ListEspecializacao = () => {
+const ListAtendimento = () => {
     const [medicoResponse, setMedicoResponse] = useState<MedicoResponse>();
     const [isLoading, setIsLoading] = useState(false);
     const [activePage, setActivePage] = useState(0);
     const [nome, setNome] = useState('');
-    const [especializacao, setEspecializacao] = useState<Especializacao>();
+    const [atendimento, setAtendimento] = useState<Atendimento>();
 
     const getMedicos = useCallback(() => {
         const params = {
@@ -21,15 +21,15 @@ const ListEspecializacao = () => {
             direction: 'ASC',
             orderBy: 'nome',
             nome,
-            especializacaoId: especializacao?.id
+            atendimento: atendimento?.id
         }
         setIsLoading(true);
-        makePrivateRequest({ url: '/medicos/especializacao', params })
+        makePrivateRequest({ url: '/medicos/atendimento', params })
        .then(response => setMedicoResponse(response.data))
        .finally(() => {
         setIsLoading(false);
        })
-    }, [activePage, nome, especializacao]);
+    }, [activePage, nome, atendimento]);
 
     useEffect(() => {
         getMedicos();    
@@ -40,14 +40,14 @@ const ListEspecializacao = () => {
         setNome(name);
     }
 
-    const handleChangeEspecializacao = (especializacao: Especializacao) => {
+    const handleChangeAtendimento = (atendimento: Atendimento) => {
         setActivePage(0);
-        setEspecializacao(especializacao);
+        setAtendimento(atendimento);
     }
 
     const clearFilters = () => {
         setActivePage(0);
-        setEspecializacao(undefined);
+        setAtendimento(undefined);
         setNome('');
     }
 
@@ -69,10 +69,10 @@ const ListEspecializacao = () => {
     return (
         <div>
             <div className="d-flex justify-content-between">
-                <EspecializacaoFilters
+                <AtendimentoFilters
                     nome={nome}
-                    especializacao={especializacao}
-                    handleChangeEspecializacao={handleChangeEspecializacao}
+                    atendimento={atendimento}
+                    handleChangeAtendimento={handleChangeAtendimento}
                     handleChangeName={handleChangeName}
                     clearFilters={clearFilters}
                     />
@@ -96,4 +96,4 @@ const ListEspecializacao = () => {
     )
 }
 
-export default ListEspecializacao;
+export default ListAtendimento;

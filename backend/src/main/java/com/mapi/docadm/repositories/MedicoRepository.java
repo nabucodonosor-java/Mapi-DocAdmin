@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import com.mapi.docadm.entities.Atendimento;
 import com.mapi.docadm.entities.Especialidade;
 import com.mapi.docadm.entities.Especializacao;
 import com.mapi.docadm.entities.Medico;
@@ -30,5 +31,13 @@ public interface MedicoRepository extends JpaRepository<Medico, Long> {
 	
 	@Query("SELECT obj FROM Medico obj JOIN FETCH obj.especializacoes WHERE obj IN :medicos")
 	List<Medico> findEspecializacoes(List<Medico> medicos);
+	
+	@Query("SELECT DISTINCT obj FROM Medico obj INNER JOIN obj.atendimentos a WHERE "
+			+ "(COALESCE(:atendimentos) IS NULL OR a IN :atendimentos) AND "
+			+ "(LOWER(obj.nome) LIKE LOWER(CONCAT('%',:nome,'%'))) ")
+	Page<Medico> findAtendimento(List<Atendimento> atendimentos, String nome, Pageable pageable);
+	
+	@Query("SELECT obj FROM Medico obj JOIN FETCH obj.atendimentos WHERE obj IN :medicos")
+	List<Medico> findAtendimento(List<Medico> medicos);
 
 }

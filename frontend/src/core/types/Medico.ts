@@ -15,6 +15,7 @@ export type Medico = {
     horarioAtendimento: string;
     especializacoes: Especializacao[];
     especialidades: Especialidade[];
+    atendimentos: Atendimento[];
 }
 
 export type Especializacao = {
@@ -23,6 +24,11 @@ export type Especializacao = {
 }
 
 export type Especialidade = {
+    id: number;
+    nome: string;
+}
+
+export type Atendimento = {
     id: number;
     nome: string;
 }

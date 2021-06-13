@@ -48,6 +48,10 @@ public class Medico implements Serializable {
 	@JoinTable(name = "tb_medico_especialidade", joinColumns = @JoinColumn(name = "medico_id"), inverseJoinColumns = @JoinColumn(name = "especialidade_id"))
 	Set<Especialidade> especialidades = new HashSet<>();
 	
+	@ManyToMany
+	@JoinTable(name = "tb_medico_atendimento", joinColumns = @JoinColumn(name = "medico_id"), inverseJoinColumns = @JoinColumn(name = "atendimento_id"))
+	Set<Atendimento> atendimentos = new HashSet<>();
+	
 	public Long getId() {
 		return id;
 	}
@@ -126,6 +130,10 @@ public class Medico implements Serializable {
 
 	public Set<Especialidade> getEspecialidades() {
 		return especialidades;
+	}
+	
+	public Set<Atendimento> getAtendimentos() {
+		return atendimentos;
 	}
 
 	@Override

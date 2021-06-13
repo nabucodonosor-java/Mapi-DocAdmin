@@ -17,7 +17,7 @@ const Admin = () => (
                     <Medicos />
                 </PrivateRoute>
                 <PrivateRoute path="/admin/busca-atendimento">
-                    <h1>Horário de Atendimento</h1>
+                    <Medicos />
                 </PrivateRoute>
                 <PrivateRoute path="/admin/busca-cidade">
                     <h1>Cidades</h1>

@@ -12,6 +12,7 @@ import javax.validation.constraints.PastOrPresent;
 
 import org.springframework.data.domain.Page;
 
+import com.mapi.docadm.entities.Atendimento;
 import com.mapi.docadm.entities.Especialidade;
 import com.mapi.docadm.entities.Especializacao;
 import com.mapi.docadm.entities.Medico;
@@ -31,7 +32,7 @@ public class MedicoDto implements Serializable {
 
 	@Email(message = "Digitar email válido!")
 	private String email;
-	
+
 	@PastOrPresent(message = "A data não pode ser futura")
 	private Instant dataNascimento;
 	private String curriculo;
@@ -39,8 +40,10 @@ public class MedicoDto implements Serializable {
 	private String horarioAtendimento;
 
 	private List<EspecializacaoDto> especializacoes = new ArrayList<>();
-	
+
 	private List<EspecialidadeDto> especialidades = new ArrayList<>();
+
+	private List<AtendimentoDto> atendimentos = new ArrayList<>();
 
 	public MedicoDto() {
 	}
@@ -57,10 +60,20 @@ public class MedicoDto implements Serializable {
 		horarioAtendimento = entity.getHorarioAtendimento();
 	}
 
-	public MedicoDto(Medico entity, Set<Especializacao> especializacoes, Set<Especialidade> especialidades) {
+	public MedicoDto(Medico entity, Set<Especializacao> especializacoes, 
+			Set<Especialidade> especialidades, Set<Atendimento> atendimentos) {
+		
 		this(entity);
-		especializacoes.forEach(especializacao -> this.especializacoes.add(new EspecializacaoDto(especializacao)));
-		especialidades.forEach(especialidade -> this.especialidades.add(new EspecialidadeDto(especialidade)));
+		
+		especializacoes.forEach(especializacao -> 
+		this.especializacoes.add(new EspecializacaoDto(especializacao)));
+		
+		especialidades.forEach(especialidade -> 
+		this.especialidades.add(new EspecialidadeDto(especialidade)));
+		
+		atendimentos.forEach(atendimento -> 
+		this.atendimentos.add(new AtendimentoDto(atendimento)));
+		
 	}
 
 	public Long getId() {
@@ -141,6 +154,10 @@ public class MedicoDto implements Serializable {
 
 	public List<EspecialidadeDto> getEspecialidades() {
 		return especialidades;
+	}
+
+	public List<AtendimentoDto> getAtendimentos() {
+		return atendimentos;
 	}
 
 	public static Page<MedicoDto> converter(Page<Medico> list) {
