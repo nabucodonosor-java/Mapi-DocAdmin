@@ -6,14 +6,14 @@ import Select from 'react-select';
 import './styles.scss';
 
 type Props = {
-    nome?: string;
-    handleChangeName: (nome: string) => void;
+    cidade?: string;
+    handleChangeCidade: (cidade: string) => void;
     handleChangeAtendimento: (atendimento: Atendimento) => void;
     clearFilters: () => void;
     atendimento?: Atendimento; 
 }
 
-const AtendimentosFilters = ({ nome, handleChangeName, atendimento, handleChangeAtendimento, clearFilters }: Props) => {
+const AtendimentosFilters = ({ cidade, handleChangeCidade, atendimento, handleChangeAtendimento, clearFilters }: Props) => {
 
     const [isLoadingAtendimento, setIsLoadingAtendimento] = useState(false);
     const [atendimentos, setAtendimentos] = useState<Atendimento[]>([]);
@@ -30,10 +30,10 @@ const AtendimentosFilters = ({ nome, handleChangeName, atendimento, handleChange
             <div className="input-search">
                 <input
                     type="text"
-                    value={nome}  
+                    value={cidade}  
                     className="form-control"
-                    placeholder="Pesquisar médico"
-                    onChange={event => handleChangeName(event.target.value)}                  
+                    placeholder="Pesquisar cidade"
+                    onChange={event => handleChangeCidade(event.target.value)}                  
                 />
                 <SearchIcon />
             </div>

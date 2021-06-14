@@ -6,9 +6,9 @@ import javax.validation.constraints.NotBlank;
 
 import org.springframework.data.domain.Page;
 
-import com.mapi.docadm.entities.Atendimento;
+import com.mapi.docadm.entities.Local;
 
-public class AtendimentoDto implements Serializable {
+public class LocalDto implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private Long id;
@@ -16,9 +16,9 @@ public class AtendimentoDto implements Serializable {
 	@NotBlank(message = "Campo obrigatório")
 	private String nome;
 	
-	public AtendimentoDto() {}
+	public LocalDto() {}
 	
-	public AtendimentoDto(Atendimento entity) {
+	public LocalDto(Local entity) {
 		id = entity.getId();
 		nome = entity.getNome();
 	}
@@ -39,8 +39,7 @@ public class AtendimentoDto implements Serializable {
 		this.nome = nome;
 	}
 
-	public static Page<AtendimentoDto> converter(Page<Atendimento> page) {
-		return page.map(AtendimentoDto::new); 
+	public static Page<LocalDto> converter(Page<Local> locais) {
+		return locais.map(LocalDto::new);
 	}
-
 }

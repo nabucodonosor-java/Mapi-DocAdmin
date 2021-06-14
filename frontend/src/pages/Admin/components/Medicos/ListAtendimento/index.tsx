@@ -11,7 +11,7 @@ const ListAtendimentos = () => {
     const [medicoResponse, setMedicoResponse] = useState<MedicoResponse>();
     const [isLoading, setIsLoading] = useState(false);
     const [activePage, setActivePage] = useState(0);
-    const [nome, setNome] = useState('');
+    const [cidade, setCidade] = useState('');
     const [atendimento, setAtendimento] = useState<Atendimento>();
 
     const getMedicos = useCallback(() => {
@@ -20,7 +20,7 @@ const ListAtendimentos = () => {
             linesPerPage: 20,
             direction: 'ASC',
             orderBy: 'nome',
-            nome,
+            cidade,
             atendimentoId: atendimento?.id
         }
         setIsLoading(true);
@@ -29,15 +29,15 @@ const ListAtendimentos = () => {
        .finally(() => {
         setIsLoading(false);
        })
-    }, [activePage, nome, atendimento]);
+    }, [activePage, cidade, atendimento]);
 
     useEffect(() => {
         getMedicos();    
     }, [getMedicos]);
     
-    const handleChangeName = (name: string) => {
+    const handleChangeCidade = (cidade: string) => {
         setActivePage(0);
-        setNome(name);
+        setCidade(cidade);
     }
 
     const handleChangeAtendimento = (atendimento: Atendimento) => {
@@ -48,7 +48,7 @@ const ListAtendimentos = () => {
     const clearFilters = () => {
         setActivePage(0);
         setAtendimento(undefined);
-        setNome('');
+        setCidade('');
     }
 
     const onRemove = (medicoId: number) => {
@@ -70,10 +70,10 @@ const ListAtendimentos = () => {
         <div>
             <div className="d-flex justify-content-between">
                 <AtendimentosFilters
-                    nome={nome}
+                    cidade={cidade}
                     atendimento={atendimento}
                     handleChangeAtendimento={handleChangeAtendimento}
-                    handleChangeName={handleChangeName}
+                    handleChangeCidade={handleChangeCidade}
                     clearFilters={clearFilters}
                     />
             </div>

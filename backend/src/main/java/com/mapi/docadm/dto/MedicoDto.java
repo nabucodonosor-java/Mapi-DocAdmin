@@ -13,8 +13,10 @@ import javax.validation.constraints.PastOrPresent;
 import org.springframework.data.domain.Page;
 
 import com.mapi.docadm.entities.Atendimento;
+import com.mapi.docadm.entities.Cidade;
 import com.mapi.docadm.entities.Especialidade;
 import com.mapi.docadm.entities.Especializacao;
+import com.mapi.docadm.entities.Local;
 import com.mapi.docadm.entities.Medico;
 
 public class MedicoDto implements Serializable {
@@ -22,7 +24,6 @@ public class MedicoDto implements Serializable {
 
 	private Long id;
 	private String imgUrl;
-
 	private String crm;
 
 	@NotBlank(message = "Campo obrigatório")
@@ -35,44 +36,59 @@ public class MedicoDto implements Serializable {
 
 	@PastOrPresent(message = "A data não pode ser futura")
 	private Instant dataNascimento;
+	
 	private String curriculo;
-
 	private String horarioAtendimento;
+	private String cidade;
+	private String local;
 
 	private List<EspecializacaoDto> especializacoes = new ArrayList<>();
 
 	private List<EspecialidadeDto> especialidades = new ArrayList<>();
 
 	private List<AtendimentoDto> atendimentos = new ArrayList<>();
+	
+	private List<LocalDto> locais = new ArrayList<>();
+	
+	private List<CidadeDto> cidades = new ArrayList<>();
 
 	public MedicoDto() {
 	}
 
 	public MedicoDto(Medico entity) {
-		id = entity.getId();
-		imgUrl = entity.getImgUrl();
-		crm = entity.getCrm();
-		nome = entity.getNome();
-		celular = entity.getCelular();
-		email = entity.getEmail();
-		dataNascimento = entity.getDataNascimento();
-		curriculo = entity.getCurriculo();
-		horarioAtendimento = entity.getHorarioAtendimento();
+		setId(entity.getId());
+		setImgUrl(entity.getImgUrl());
+		setCrm(entity.getCrm());
+		setNome(entity.getNome());
+		setCelular(entity.getCelular());
+		setEmail(entity.getEmail());
+		setDataNascimento(entity.getDataNascimento());
+		setCurriculo(entity.getCurriculo());
+		setHorarioAtendimento(entity.getHorarioAtendimento());
+		setCidade(entity.getCidade());
+		setLocal(entity.getLocal());
 	}
 
 	public MedicoDto(Medico entity, Set<Especializacao> especializacoes, 
-			Set<Especialidade> especialidades, Set<Atendimento> atendimentos) {
+			Set<Especialidade> especialidades, Set<Atendimento> atendimentos, Set<Cidade> cidades,
+			Set<Local> locais) {
 		
 		this(entity);
 		
 		especializacoes.forEach(especializacao -> 
-		this.especializacoes.add(new EspecializacaoDto(especializacao)));
+		this.getEspecializacoes().add(new EspecializacaoDto(especializacao)));
 		
 		especialidades.forEach(especialidade -> 
-		this.especialidades.add(new EspecialidadeDto(especialidade)));
+		this.getEspecialidades().add(new EspecialidadeDto(especialidade)));
 		
 		atendimentos.forEach(atendimento -> 
-		this.atendimentos.add(new AtendimentoDto(atendimento)));
+		this.getAtendimentos().add(new AtendimentoDto(atendimento)));
+		
+		cidades.forEach(cidade -> 
+		this.getCidades().add(new CidadeDto(cidade)));
+		
+		locais.forEach(local -> 
+		this.getLocais().add(new LocalDto(local)));
 		
 	}
 
@@ -148,6 +164,22 @@ public class MedicoDto implements Serializable {
 		this.horarioAtendimento = horarioAtendimento;
 	}
 
+	public String getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
+	}
+
+	public String getLocal() {
+		return local;
+	}
+
+	public void setLocal(String local) {
+		this.local = local;
+	}
+
 	public List<EspecializacaoDto> getEspecializacoes() {
 		return especializacoes;
 	}
@@ -160,8 +192,15 @@ public class MedicoDto implements Serializable {
 		return atendimentos;
 	}
 
+	public List<LocalDto> getLocais() {
+		return locais;
+	}
+
+	public List<CidadeDto> getCidades() {
+		return cidades;
+	}
+	
 	public static Page<MedicoDto> converter(Page<Medico> list) {
 		return list.map(MedicoDto::new);
 	}
-
 }

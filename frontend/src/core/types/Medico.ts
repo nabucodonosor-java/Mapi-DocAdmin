@@ -13,6 +13,7 @@ export type Medico = {
     dataNascimento: Date;
     curriculo: string;
     horarioAtendimento: string;
+    cidade: string;
     especializacoes: Especializacao[];
     especialidades: Especialidade[];
     atendimentos: Atendimento[];

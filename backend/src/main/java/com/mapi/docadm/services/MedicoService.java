@@ -15,17 +15,23 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.mapi.docadm.dto.AtendimentoDto;
+import com.mapi.docadm.dto.CidadeDto;
 import com.mapi.docadm.dto.EspecialidadeDto;
 import com.mapi.docadm.dto.EspecializacaoDto;
+import com.mapi.docadm.dto.LocalDto;
 import com.mapi.docadm.dto.MedicoDto;
 import com.mapi.docadm.dto.UriDto;
 import com.mapi.docadm.entities.Atendimento;
+import com.mapi.docadm.entities.Cidade;
 import com.mapi.docadm.entities.Especialidade;
 import com.mapi.docadm.entities.Especializacao;
+import com.mapi.docadm.entities.Local;
 import com.mapi.docadm.entities.Medico;
 import com.mapi.docadm.repositories.AtendimentoRepository;
+import com.mapi.docadm.repositories.CidadeRepository;
 import com.mapi.docadm.repositories.EspecialidadeRepository;
 import com.mapi.docadm.repositories.EspecializacaoRepository;
+import com.mapi.docadm.repositories.LocalRepository;
 import com.mapi.docadm.repositories.MedicoRepository;
 import com.mapi.docadm.services.exceptions.DBException;
 import com.mapi.docadm.services.exceptions.EntidadeNaoEncontradaException;
@@ -48,12 +54,18 @@ public class MedicoService {
 	@Autowired
 	private AtendimentoRepository atendimentoRepository;
 	
+	@Autowired
+	private CidadeRepository cidadeRepository;
+	
+	@Autowired
+	private LocalRepository localRepository;
+	
 	@Transactional(readOnly = true)
 	public Page<MedicoDto> findAllPaged(PageRequest pageRequest, Long especialidadeId, String nome) {
 		List<Especialidade> especialidades = (especialidadeId == 0) ? null : Arrays.asList(especialidadeRepository.getOne(especialidadeId));
 		Page<Medico> page = repository.find(especialidades, nome, pageRequest);
 		repository.find(page.toList());
-		return page.map(x -> new MedicoDto(x, x.getEspecializacoes(), x.getEspecialidades(), x.getAtendimentos()));
+		return page.map(x -> new MedicoDto(x, x.getEspecializacoes(), x.getEspecialidades(), x.getAtendimentos(), x.getCidades(), x.getLocais()));
 	}
 	
 	@Transactional(readOnly = true)
@@ -61,22 +73,22 @@ public class MedicoService {
 		List<Especializacao> especializacoes = (especializacaoId == 0) ? null : Arrays.asList(especializacaoRepository.getOne(especializacaoId));
 		Page<Medico> page = repository.findEspecializacoes(especializacoes, nome, pageRequest);
 		repository.findEspecializacoes(page.toList());
-		return page.map(x -> new MedicoDto(x, x.getEspecializacoes(), x.getEspecialidades(), x.getAtendimentos()));
+		return page.map(x -> new MedicoDto(x, x.getEspecializacoes(), x.getEspecialidades(), x.getAtendimentos(), x.getCidades(), x.getLocais()));
 	}
 	
 	@Transactional(readOnly = true)
-	public Page<MedicoDto> findAllPagedAtendimentos(PageRequest pageRequest, Long atendimentoId, String nome) {
+	public Page<MedicoDto> findAllPagedAtendimentos(PageRequest pageRequest, Long atendimentoId, String cidade) {
 		List<Atendimento> atendimentos = (atendimentoId == 0) ? null : Arrays.asList(atendimentoRepository.getOne(atendimentoId));
-		Page<Medico> page = repository.findAtendimentos(atendimentos, nome, pageRequest);
+		Page<Medico> page = repository.findAtendimentos(atendimentos, cidade, pageRequest);
 		repository.findAtendimentos(page.toList());
-		return page.map(x -> new MedicoDto(x, x.getEspecializacoes(), x.getEspecialidades(), x.getAtendimentos()));
+		return page.map(x -> new MedicoDto(x, x.getEspecializacoes(), x.getEspecialidades(), x.getAtendimentos(), x.getCidades(), x.getLocais()));
 	}
 	
 	@Transactional(readOnly = true)
 	public MedicoDto findById(Long id) {
 		Optional<Medico> optional = repository.findById(id);
 		Medico entity = optional.orElseThrow(() -> new EntidadeNaoEncontradaException("Médico não encontrado!"));
-		return new MedicoDto(entity, entity.getEspecializacoes(), entity.getEspecialidades(), entity.getAtendimentos());
+		return new MedicoDto(entity, entity.getEspecializacoes(), entity.getEspecialidades(), entity.getAtendimentos(), entity.getCidades(), entity.getLocais());
  	}
 	
 	@Transactional
@@ -130,6 +142,7 @@ public class MedicoService {
 		entity.getEspecializacoes().clear();
 		entity.getEspecialidades().clear();
 		entity.getAtendimentos().clear();
+		entity.getCidades().clear();
 		
 		for (EspecializacaoDto especializacaoDto : dto.getEspecializacoes()) {
 			Especializacao especializacao = especializacaoRepository.getOne(especializacaoDto.getId());
@@ -144,6 +157,16 @@ public class MedicoService {
 		for (AtendimentoDto atendDto : dto.getAtendimentos()) {
 			Atendimento atendimento = atendimentoRepository.getOne(atendDto.getId());
 			entity.getAtendimentos().add(atendimento);
+		}
+		
+		for (CidadeDto cidadeDto : dto.getCidades()) {
+			Cidade cidade = cidadeRepository.getOne(cidadeDto.getId());
+			entity.getCidades().add(cidade);
+		}
+		
+		for (LocalDto localDto : dto.getLocais()) {
+			Local local = localRepository.getOne(localDto.getId());
+			entity.getLocais().add(local);
 		}
 	}
 	

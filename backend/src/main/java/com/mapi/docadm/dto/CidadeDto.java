@@ -6,21 +6,26 @@ import javax.validation.constraints.NotBlank;
 
 import org.springframework.data.domain.Page;
 
-import com.mapi.docadm.entities.Atendimento;
+import com.mapi.docadm.entities.Cidade;
 
-public class AtendimentoDto implements Serializable {
+public class CidadeDto implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	private Long id;
-	
+
 	@NotBlank(message = "Campo obrigatório")
 	private String nome;
-	
-	public AtendimentoDto() {}
-	
-	public AtendimentoDto(Atendimento entity) {
+
+	@NotBlank(message = "Campo obrigatório")
+	private String uf;
+
+	public CidadeDto() {
+	}
+
+	public CidadeDto(Cidade entity) {
 		id = entity.getId();
 		nome = entity.getNome();
+		uf = entity.getUf();
 	}
 
 	public Long getId() {
@@ -39,8 +44,16 @@ public class AtendimentoDto implements Serializable {
 		this.nome = nome;
 	}
 
-	public static Page<AtendimentoDto> converter(Page<Atendimento> page) {
-		return page.map(AtendimentoDto::new); 
+	public String getUf() {
+		return uf;
+	}
+
+	public void setUf(String uf) {
+		this.uf = uf;
+	}
+
+	public static Page<CidadeDto> converter(Page<Cidade> cidades) {
+		return cidades.map(CidadeDto::new);
 	}
 
 }

@@ -14,6 +14,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+
+import org.checkerframework.common.aliasing.qual.Unique;
 
 @Entity
 @Table(name = "tb_medico")
@@ -26,9 +29,17 @@ public class Medico implements Serializable {
 
 	@Column(columnDefinition = "TEXT")
 	private String imgUrl;
+
+	@Unique
 	private String crm;
+
+	@Unique
 	private String nome;
+
 	private String celular;
+
+	@Email
+	@Unique
 	private String email;
 
 	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
@@ -40,18 +51,30 @@ public class Medico implements Serializable {
 	@Column(columnDefinition = "TEXT")
 	private String horarioAtendimento;
 
+	private String cidade;
+
+	private String local;
+
 	@ManyToMany
 	@JoinTable(name = "tb_medico_especializacao", joinColumns = @JoinColumn(name = "medico_id"), inverseJoinColumns = @JoinColumn(name = "especializacao_id"))
 	Set<Especializacao> especializacoes = new HashSet<>();
-	
+
 	@ManyToMany
 	@JoinTable(name = "tb_medico_especialidade", joinColumns = @JoinColumn(name = "medico_id"), inverseJoinColumns = @JoinColumn(name = "especialidade_id"))
 	Set<Especialidade> especialidades = new HashSet<>();
-	
+
 	@ManyToMany
 	@JoinTable(name = "tb_medico_atendimento", joinColumns = @JoinColumn(name = "medico_id"), inverseJoinColumns = @JoinColumn(name = "atendimento_id"))
 	Set<Atendimento> atendimentos = new HashSet<>();
-	
+
+	@ManyToMany
+	@JoinTable(name = "tb_medico_atendimento", joinColumns = @JoinColumn(name = "medico_id"), inverseJoinColumns = @JoinColumn(name = "atendimento_id"))
+	Set<Local> locais = new HashSet<>();
+
+	@ManyToMany
+	@JoinTable(name = "tb_medico_cidade", joinColumns = @JoinColumn(name = "medico_id"), inverseJoinColumns = @JoinColumn(name = "cidade_id"))
+	Set<Cidade> cidades = new HashSet<>();
+
 	public Long getId() {
 		return id;
 	}
@@ -124,6 +147,22 @@ public class Medico implements Serializable {
 		this.horarioAtendimento = horarioAtendimento;
 	}
 
+	public String getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
+	}
+
+	public String getLocal() {
+		return local;
+	}
+
+	public void setLocal(String local) {
+		this.local = local;
+	}
+
 	public Set<Especializacao> getEspecializacoes() {
 		return especializacoes;
 	}
@@ -131,9 +170,17 @@ public class Medico implements Serializable {
 	public Set<Especialidade> getEspecialidades() {
 		return especialidades;
 	}
-	
+
 	public Set<Atendimento> getAtendimentos() {
 		return atendimentos;
+	}
+
+	public Set<Local> getLocais() {
+		return locais;
+	}
+
+	public Set<Cidade> getCidades() {
+		return cidades;
 	}
 
 	@Override
