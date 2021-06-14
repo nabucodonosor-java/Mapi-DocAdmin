@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Atendimento, Especialidade, Especializacao } from 'core/types/Medico';
+import { Atendimento, Cidade, Especialidade, Especializacao, Local } from 'core/types/Medico';
 import './styles.scss';
 import { Controller, useForm } from 'react-hook-form';
 import { useHistory, useParams } from 'react-router';
@@ -20,9 +20,14 @@ export type FormState = {
     dataNascimento: Date;
     curriculo: string;
     horarioAtendimento: string;
+    cidade: string;
+    local: string;
+    visitaAgendada: Date;
     especializacoes: Especializacao[];
     especialidades: Especialidade[];
     atendimentos: Atendimento[];
+    locais: Local[];
+    cidades: Cidade[];
 }
 
 type ParamsType = {
@@ -39,6 +44,13 @@ const Form = () => {
     const [especialidades, setEspecialidades] = useState<Especializacao[]>([]);
     const [isLoadingAtendimentos, setIsLoadingAtendimentos] = useState(false);
     const [atendimentos, setAtendimentos] = useState<Atendimento[]>([]);
+
+    const [isLoadingCidades, setIsLoadingCidades] = useState(false);
+    const [cidades, setCidades] = useState<Cidade[]>([]);
+
+    const [isLoadingLocais, setIsLoadingLocais] = useState(false);
+    const [locais, setLocais] = useState<Local[]>([]);
+    
     const [uploadedImgUrl, setUploadedImgUrl] = useState('');
     const [medicoImgUrl, setMedicoImgUrl] = useState('');
     const isEditing = medicoId !== 'create';
@@ -48,15 +60,21 @@ const Form = () => {
        if (isEditing) {
         makePrivateRequest({ url: `/medicos/${medicoId}`})
         .then(response => {
-            setValue('especialidades', response.data.especialidades);
+            
             setValue('crm', response.data.crm);
             setValue('nome', response.data.nome);
             setValue('celular', response.data.celular);
             setValue('email', response.data.email);
             setValue('curriculo', response.data.curriculo);
             setValue('horarioAtendimento', response.data.horarioAtendimento);
+            setValue('cidade', response.data.cidade);
+            setValue('local', response.data.local);
+
+            setValue('especialidades', response.data.especialidades);
             setValue('especializacoes', response.data.especializacoes);
             setValue('atendimentos', response.data.atendimentos);
+            setValue('cidades', response.data.cidades);
+            setValue('locais', response.data.locais);
 
             setMedicoImgUrl(response.data.imgUrl);
         })
@@ -82,6 +100,20 @@ const Form = () => {
         makePrivateRequest({ url: '/atendimento' })
             .then(response => setAtendimentos(response.data.content))
             .finally(() => setIsLoadingAtendimentos(false));
+    }, []);
+
+    useEffect(() => {
+        setIsLoadingCidades(true);
+        makePrivateRequest({ url: '/cidade' })
+            .then(response => setCidades(response.data.content))
+            .finally(() => setIsLoadingCidades(false));
+    }, []);
+
+    useEffect(() => {
+        setIsLoadingLocais(true);
+        makePrivateRequest({ url: '/local' })
+            .then(response => setLocais(response.data.content))
+            .finally(() => setIsLoadingLocais(false));
     }, []);
 
     const onSubmit = (data: FormState) => {
@@ -112,7 +144,6 @@ const Form = () => {
             <BaseForm title={formTitle}>
                 <div className="row">
                     <div className="col-6">
-
                             <div className="margin-bottom-30 d-flex">
                             <Controller
                                 as={Select}
@@ -213,9 +244,54 @@ const Form = () => {
                             <div className="margin-bottom-30">
                                 <ImageUpload onUploadSuccess={onUploadSuccess} medicoImgUrl={medicoImgUrl}/>
                             </div>
-
                     </div>
                     <div className="col-6 medicos-descricoes">
+                            <Controller
+                                as={Select}
+                                name="locais"
+                                rules={{ required: false }}
+                                control={control}
+                                isLoading={isLoadingLocais}
+                                options={locais}
+                                getOptionLabel={(option: Local) => option.nome}
+                                getOptionValue={(option: Local) => String(option.id)}
+                                classNamePrefix="especializacoes-select"
+                                className="input-select mb-2"
+                                placeholder="Locais de Atendimento"
+                                inputId="locais"
+                                defaultValue=""
+                                isMulti
+                                />
+                                <Controller
+                                as={Select}
+                                name="cidades"
+                                rules={{ required: false }}
+                                control={control}
+                                isLoading={isLoadingCidades}
+                                options={cidades}
+                                getOptionLabel={(option: Cidade) => option.nome}
+                                getOptionValue={(option: Cidade) => String(option.id)}
+                                classNamePrefix="especializacoes-select"
+                                className="input-select mb-2"
+                                placeholder="Cidades de Atendimento"
+                                inputId="cidades"
+                                defaultValue=""
+                                isMulti
+                                />
+                                <input 
+                                ref={register({required: false})}
+                                name="local"
+                                type="text" 
+                                className="form-control input-base mb-2"
+                                placeholder="Local de visita"
+                                />
+                                 <input 
+                                ref={register({required: false})}
+                                name="cidade"
+                                type="text" 
+                                className="form-control input-base mb-2"
+                                placeholder="Cidade de visita"
+                                />
                             <Controller
                                 as={Select}
                                 name="atendimentos"
@@ -232,25 +308,27 @@ const Form = () => {
                                 defaultValue=""
                                 isMulti
                                 />
-                        <label>Observações</label>
-                        <textarea
-                        ref={register({ required: false})}
-                        name="curriculo"
-                        className="form-control input-base mb-2"
-                        placeholder="Currículo"
-                        cols={30} 
-                        rows={10}    
-                        />
                         <label>Horários de Atendimento</label>
                         <textarea
                         ref={register({ required: false})}
                         name="horarioAtendimento"
-                        className="form-control input-base"
+                        className="form-control input-base mb-3"
                         placeholder="Horário de Atendimento"
                         cols={30} 
                         rows={10}    
                         />
                     </div>
+     
+                    <h6>Currículo e Observações</h6>
+                            <textarea
+                                ref={register({ required: false})}
+                                name="curriculo"
+                                className="form-control input-base mb-2 mt-2"
+                                placeholder="Currículo"
+                                cols={30} 
+                                rows={10}    
+                                />
+                    
                 </div>
             </BaseForm>
         </form>

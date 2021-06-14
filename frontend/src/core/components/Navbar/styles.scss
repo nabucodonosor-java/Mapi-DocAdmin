@@ -1,11 +1,12 @@
 .main-nav {
+    width: 100% !important;
     height: 70px;
     color: white;
+    display: flex;
+    flex-wrap: nowrap;
     align-items: center;
-    padding-left: 40px;
-    padding-right: 40px;
-    margin-left: 0;
-    margin-right: 0;
+    padding: 0 40px;
+    margin: 0px;
 }
 
 .nav-logo-text {

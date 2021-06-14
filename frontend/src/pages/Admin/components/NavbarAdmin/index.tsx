@@ -18,12 +18,7 @@ const NavbarAdmin = () => (
             </li>
             <li>
                 <NavLink to="/admin/busca-atendimento" className="admin-nav-admin-item">
-                    Busca Médico por Horário de Atendimento
-                </NavLink>
-            </li>
-            <li>
-                <NavLink to="/admin/busca-cidade" className="admin-nav-admin-item">
-                    Busca Médico por Cidade
+                    Busca Médico por Cidade e Horário de Atendimento
                 </NavLink>
             </li>
             {isAllowebByRole(['ROLE_ADMIN']) && (

@@ -10,7 +10,7 @@ const Home = () => (
            <div className="col-6">
                 <h1 className="text-title">Base de Médicos<br/> Jácomo Aricó</h1>
                 <p className="text-subtitle"> 
-                    Base de visitação dos médicos de<br/> Ribeirão Preto e região
+                   Base de Dados de visitação de Ribeirão Preto e região, Araraquara/São Carlos e micro região.
                 </p>
                 <Link to="/medicos">
                     <ButtonIcon text="inicie agora a sua busca" />

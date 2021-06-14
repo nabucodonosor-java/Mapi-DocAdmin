@@ -41,6 +41,8 @@ public class MedicoDto implements Serializable {
 	private String horarioAtendimento;
 	private String cidade;
 	private String local;
+	
+	private Instant visitaAgendada;
 
 	private List<EspecializacaoDto> especializacoes = new ArrayList<>();
 
@@ -56,17 +58,18 @@ public class MedicoDto implements Serializable {
 	}
 
 	public MedicoDto(Medico entity) {
-		setId(entity.getId());
-		setImgUrl(entity.getImgUrl());
-		setCrm(entity.getCrm());
-		setNome(entity.getNome());
-		setCelular(entity.getCelular());
-		setEmail(entity.getEmail());
-		setDataNascimento(entity.getDataNascimento());
-		setCurriculo(entity.getCurriculo());
-		setHorarioAtendimento(entity.getHorarioAtendimento());
-		setCidade(entity.getCidade());
-		setLocal(entity.getLocal());
+		id = entity.getId();
+		imgUrl = entity.getImgUrl();
+		crm = entity.getCrm();
+		nome = entity.getNome();
+		celular = entity.getCelular();
+		email = entity.getEmail();
+		dataNascimento = entity.getDataNascimento();
+		curriculo = entity.getCurriculo();
+		horarioAtendimento = entity.getHorarioAtendimento();
+		cidade = entity.getCidade();
+		local = entity.getLocal();
+		visitaAgendada = entity.getVisitaAgendada();	
 	}
 
 	public MedicoDto(Medico entity, Set<Especializacao> especializacoes, 
@@ -200,7 +203,15 @@ public class MedicoDto implements Serializable {
 		return cidades;
 	}
 	
+	public Instant getVisitaAgendada() {
+		return visitaAgendada;
+	}
+
+	public void setVisitaAgendada(Instant visitaAgendada) {
+		this.visitaAgendada = visitaAgendada;
+	}
+	
 	public static Page<MedicoDto> converter(Page<Medico> list) {
 		return list.map(MedicoDto::new);
-	}
+	}	
 }

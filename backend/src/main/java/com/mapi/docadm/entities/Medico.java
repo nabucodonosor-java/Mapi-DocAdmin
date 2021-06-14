@@ -30,15 +30,18 @@ public class Medico implements Serializable {
 	@Column(columnDefinition = "TEXT")
 	private String imgUrl;
 
+	@Column(unique = true)
 	@Unique
 	private String crm;
 
+	@Column(unique = true)
 	@Unique
 	private String nome;
 
 	private String celular;
 
 	@Email
+	@Column(unique = true)
 	@Unique
 	private String email;
 
@@ -55,25 +58,28 @@ public class Medico implements Serializable {
 
 	private String local;
 
+	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+	private Instant visitaAgendada;
+
 	@ManyToMany
 	@JoinTable(name = "tb_medico_especializacao", joinColumns = @JoinColumn(name = "medico_id"), inverseJoinColumns = @JoinColumn(name = "especializacao_id"))
-	Set<Especializacao> especializacoes = new HashSet<>();
+	private Set<Especializacao> especializacoes = new HashSet<>();
 
 	@ManyToMany
 	@JoinTable(name = "tb_medico_especialidade", joinColumns = @JoinColumn(name = "medico_id"), inverseJoinColumns = @JoinColumn(name = "especialidade_id"))
-	Set<Especialidade> especialidades = new HashSet<>();
+	private Set<Especialidade> especialidades = new HashSet<>();
 
 	@ManyToMany
 	@JoinTable(name = "tb_medico_atendimento", joinColumns = @JoinColumn(name = "medico_id"), inverseJoinColumns = @JoinColumn(name = "atendimento_id"))
-	Set<Atendimento> atendimentos = new HashSet<>();
+	private Set<Atendimento> atendimentos = new HashSet<>();
 
 	@ManyToMany
-	@JoinTable(name = "tb_medico_atendimento", joinColumns = @JoinColumn(name = "medico_id"), inverseJoinColumns = @JoinColumn(name = "atendimento_id"))
-	Set<Local> locais = new HashSet<>();
+	@JoinTable(name = "tb_medico_local", joinColumns = @JoinColumn(name = "medico_id"), inverseJoinColumns = @JoinColumn(name = "local_id"))
+	private Set<Local> locais = new HashSet<>();
 
 	@ManyToMany
 	@JoinTable(name = "tb_medico_cidade", joinColumns = @JoinColumn(name = "medico_id"), inverseJoinColumns = @JoinColumn(name = "cidade_id"))
-	Set<Cidade> cidades = new HashSet<>();
+	private Set<Cidade> cidades = new HashSet<>();
 
 	public Long getId() {
 		return id;
@@ -181,6 +187,14 @@ public class Medico implements Serializable {
 
 	public Set<Cidade> getCidades() {
 		return cidades;
+	}
+
+	public Instant getVisitaAgendada() {
+		return visitaAgendada;
+	}
+
+	public void setVisitaAgendada(Instant visitaAgendada) {
+		this.visitaAgendada = visitaAgendada;
 	}
 
 	@Override

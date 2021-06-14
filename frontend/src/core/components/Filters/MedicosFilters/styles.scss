@@ -1,6 +1,6 @@
 .medico-filters-container {
-    width: 100%;
-    padding: 10px 20px;
+    width: 70%;
+    padding: 5px 10px;
     border-radius: 10px;
     display: flex;
     justify-content: space-between;
@@ -10,7 +10,7 @@
     display: flex;
     align-items: center;
     border-bottom: 1px solid #E1E1E1;
-    flex: 1;
+    flex: 1; 
 
     input {
         border: none;
@@ -35,7 +35,6 @@
         border: none;
         border-radius: 0;
         border-bottom: 1px solid #E1E1E1;
-        font-size: 14px;
     }
     
     .medico-especializacoes-select__indicator-separator {
@@ -44,5 +43,6 @@
     
     .medico-especializacoes-select__placeholder {
         color: #9E9E9E;
+        font-size: 14px;
     }
 }

@@ -138,11 +138,15 @@ public class MedicoService {
 		entity.setDataNascimento(dto.getDataNascimento());
 		entity.setCurriculo(dto.getCurriculo());
 		entity.setHorarioAtendimento(dto.getHorarioAtendimento());
+		entity.setCidade(dto.getCidade());
+		entity.setLocal(dto.getLocal());
+		entity.setVisitaAgendada(dto.getVisitaAgendada());
 		
 		entity.getEspecializacoes().clear();
 		entity.getEspecialidades().clear();
 		entity.getAtendimentos().clear();
 		entity.getCidades().clear();
+		entity.getLocais().clear();
 		
 		for (EspecializacaoDto especializacaoDto : dto.getEspecializacoes()) {
 			Especializacao especializacao = especializacaoRepository.getOne(especializacaoDto.getId());
