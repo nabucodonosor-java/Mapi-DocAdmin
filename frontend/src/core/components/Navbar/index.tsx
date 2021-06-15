@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { getAccessTokenDecoded, logout } from 'core/utils/auth';
+import { getAccessTokenDecoded, logout, isAllowebByRole } from 'core/utils/auth';
 import { Link, NavLink, useLocation } from 'react-router-dom';
+import menu from 'core/assets/images/menu-icon.svg';
 import './styles.scss';
 
 const Navbar = () => {
+    const [drawerActive, setDrawerActive] = useState(false);
     const [currentUser, setCurrentUser] = useState('');
     const location = useLocation();
 
@@ -18,40 +20,75 @@ const Navbar = () => {
     }, [location]);
     
     return (
-        <nav className="row bg-primary main-nav">
-            <div className="col-3">
-                <Link to="/" className="nav-logo-text">
+        <nav className="bg-primary navbar-main">
+  
+                <Link to="/" className="navbar-logo-text">
                     <img 
                     src="https://doc-admin-jacomo.s3.sa-east-1.amazonaws.com/logo.png" 
                     alt="Foto"
                     className="navbar-logo" />
                     <h4>DocAdmin</h4>
                 </Link>
-            </div>
-            <div className="col-6">
-                <ul className="main-menu">
+                <button className="navbar-mobile-btn" type="button" onClick={() => setDrawerActive(!drawerActive)}>
+                    <img src={menu} alt="Mobile Menu" />
+                </button>
+
+                <div className={ drawerActive ? "navbar-mobile-container" : "navbar-menu-container" }> 
+                <ul className="navbar-main-menu">
                     <li>
-                        <NavLink className="nav-link" to="/" activeClassName="active" exact>HOME</NavLink>
+                    <NavLink onClick={() => setDrawerActive(false)} className="navbar-link" to="/" activeClassName="active" exact>HOME</NavLink>
                     </li>
                     <li>
-                        <NavLink className="nav-link" to="/medicos" activeClassName="active" exact>MÉDICOS (AS)</NavLink>
+                    <NavLink onClick={() => setDrawerActive(false)} className="navbar-link" to="/medicos" activeClassName="active" exact>LISTA</NavLink>
                     </li>
-                    <li>
-                        <NavLink className="nav-link" to="/admin" activeClassName="active" exact>ADMIN</NavLink>
+                    {isAllowebByRole(['ROLE_ADMIN']) && (
+                        <li>
+                        <NavLink onClick={() => setDrawerActive(false)} className="navbar-link" to="/admin" activeClassName="active" exact>ADMIN</NavLink>
                     </li>
+                    )}
+                    {drawerActive && (
+                            <li>
+                                {currentUser && (
+                                    <a 
+                                    href="#logout" 
+                                    className="nav-link active d-inline" 
+                                    onClick={(e) => {
+                                        setDrawerActive(false);
+                                        handleLogout(e);
+                                    }} >
+                                        {`LOGOUT - ${currentUser}`}
+                                    </a>
+                                )}
+                            </li>
+                    )}
+
+                    {drawerActive && (
+                            <>
+                                {!currentUser && (
+                                    <li>
+                                        <Link onClick={() => setDrawerActive(false)} to="/auth/login" className="navbar-link active">LOGIN</Link>
+                                    </li>        
+                                )}
+                            </>
+                        )}
                 </ul>
-            </div>
-            <div className="col-3 text-right">
+            </div> 
+            <div className="user-info-dnone text-right">
                { currentUser && (
                    <>
-                    {currentUser}
-                    <a href="logout" className="nav-link active d-inline" onClick={handleLogout}>
+                    <a href="logout" className="navbar-link active d-inline ml-3" onClick={(e) => {
+                        setDrawerActive(false);
+                        handleLogout(e);
+                    }}>
                         LOGOUT
                     </a>
+                    <div>  
+                        <h6 className="nav-link-email">{currentUser}</h6>
+                    </div>                   
                    </>
                )}
                 { !currentUser && (
-                    <Link className="nav-link active" to="/auth/login">
+                    <Link onClick={() => setDrawerActive(false)} className="navbar-link active" to="/auth/login">
                     LOGIN
                     </Link>
                 )}

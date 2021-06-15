@@ -1,4 +1,4 @@
-.main-nav {
+.navbar-main {
     width: 100% !important;
     height: 70px;
     color: white;
@@ -9,7 +9,8 @@
     margin: 0px; 
 }
 
-.nav-logo-text {
+.navbar-logo-text {
+    width: 30%;
     color: #FFF;
     display: flex;
     align-items: center;
@@ -20,9 +21,24 @@
     margin-right: 10px;
 }
 
-.main-menu {
+.navbar-mobile-btn {
+    display: none;
+}
+
+.navbar-menu-container {
+   width: 55%;
+   display: flex;
+   flex: 1;
+   justify-content: center;
+   flex-wrap: nowrap; 
+}
+
+.navbar-main-menu {
+    max-width: 300px;
     display: flex;
-    justify-content: center;
+    flex: 1;
+    justify-content: space-between;
+    align-items: flex-end;
 
     li {
         margin-right: 15px;
@@ -30,10 +46,11 @@
     }    
 }
 
-.nav-link {
+.navbar-link {
     font-size: 18px;
     font-style: normal;
     color: rgba(255, 255, 255, 0.5);
+    margin-right: 5px;
 
     &.active {
          font-weight: bold;
@@ -43,4 +60,66 @@
     &:hover {
         color: #FFF;
     }
+}
+
+.nav-link-email {
+    font-size: 10px;
+}
+
+@media (max-width: 768px) {
+    .navbar-menu-container {
+        justify-content: flex-end;
+    }
+}
+
+@media (max-width: 576px) {
+    
+    .navbar-main {
+        width: 100% !important;
+        justify-content: space-between;
+    }
+
+    .navbar-menu-container,
+    .user-info-dnone {
+        display: none;
+    }
+
+    .navbar-logo-text {
+        width: 50%;
+        margin-left: 15px;
+    }
+
+    .navbar-mobile-btn {
+        display: block;
+        border: none;
+        background: transparent;
+        width: 10px;
+        outline: none;
+    }
+
+    .navbar-mobile-container {
+        width: 100%;
+        top: 70px;
+        left: 0;
+        display: flex;
+        flex-direction: column;
+        padding: 10px;
+        background: #2d769a;
+        position: absolute;
+        z-index: 10;
+    }
+ 
+    .navbar-mobile-container ul {
+       height: 150px;
+       display: flex;
+       align-items: flex-start;
+       flex: 1;
+       flex-direction: column;
+       top: 40px;
+    }
+
+    .navbar-mobile-container li {
+        width: 96vw;
+        margin: 5px 0px;
+     }
 }
