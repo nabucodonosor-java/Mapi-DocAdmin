@@ -11,7 +11,7 @@ type ParamsType = {
     medicoId: string;
 }
 
-const MedicoDetails = () => {
+const MedicoDetails = () => { 
 
     const { medicoId } = useParams<ParamsType>();
     const [medico, setMedico] = useState<Medico>();
@@ -31,27 +31,26 @@ const MedicoDetails = () => {
                 <ArrowIcon className="medico-details-icon-goback"/>
                 <h1 className="medico-details-text-goback">voltar</h1>
                 </Link>
-                <div className="row">
-                    <div className="col-6 pr-5">
+                <div className="morador-details-div-info">
                         {isLoading ? <MedicoInfoLoader /> : (
-                            <>
-                            <div className="medico-details-card text-center">
-                                 <img src={medico?.imgUrl} alt={medico?.nome} className="medico-details-image" />
-                            </div>
-                                <h1 className="medico-details-name">
-                                     {medico?.nome}
-                                </h1>
+                    <div className="medico-details-card">
+                        <div className="text-center">
+                                <img src={medico?.imgUrl} alt={medico?.nome} className="medico-details-image" />
+                        </div>
+                            <h1 className="medico-details-name">
+                                {medico?.nome}
+                            </h1>
                             <div className="medico-details-specialty">
                                 <h6 className="medico-details-specialty-title">
                                     {medico?.especialidades.map(e => e.nome)}
                                 </h6>
                             </div>
-                            </>
+                        </div>
                         )}   
                     </div>
-                    <div className="col-6 card-base border-radius-20 medico-details-info">
+                    <div className="card-base border-radius-20 medico-details-info-card">
                         {isLoading ? <MedicoDescriptionLoader /> : (
-                              <>
+                              <div className="morador-details-info-fields">
                               <div className="mb-2">
                                 <h6 className="medico-details-info-title">CRM</h6>
                                 {medico?.crm}
@@ -68,26 +67,26 @@ const MedicoDetails = () => {
                                 <h6 className="medico-details-info-title">EMAIL</h6>
                                 {medico?.email}
                               </div>
-                              <h1 className="medico-details-atendimento-title">
+                              <h1 className="medico-details-large-text-title">
                                    Horários de Atendimento
                                    </h1>
-                               <p className="medico-details-atendimento-text">
+                               <p className="medico-details-large-text-text">
                                    {medico?.horarioAtendimento}
                                </p>
-                              <h1 className="medico-details-atendimento-title">
+                              <h1 className="medico-details-large-text-title">
                                    Observações
                                    </h1>
-                               <p className="medico-details-atendimento-text">
+                               <p className="medico-details-large-text-text">
                                    {medico?.curriculo}
                                </p>
 
                               
-                              </>
+                              </div>
                         )}   
                     </div>
                 </div>
             </div>
-        </div>
+
     );
 };
 

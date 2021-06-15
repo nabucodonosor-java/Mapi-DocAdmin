@@ -17,7 +17,7 @@ const Catalog = () => {
     const [especialidade, setEspecialidade] = useState<Especialidade>();
 
     const getMedicos = useCallback(() => {
-        const params = {
+        const params = { 
             page: activePage,
             linesPerPage: 15,
             nome,
@@ -54,7 +54,7 @@ const Catalog = () => {
 
     return (
         <div className="catalog-container">
-            <div className="d-flex justify-content-between">
+            <div className="catalog-filter-container">
                
                 <MedicoFilters
                     nome={nome}

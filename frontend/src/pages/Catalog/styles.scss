@@ -5,16 +5,57 @@
     padding-bottom: 50px;
 }
 
+.catalog-filter-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
 .catalog-title {
     font-size: 24px;
     line-height: 33px;
     letter-spacing: -0.015em;
+    margin-right: 10px;
 }
 
 .catalog-medicos {
-    margin-top: 43px;
+    margin-top: 40px;
     display: grid;
     grid-template-columns: repeat(auto-fill, 400px);
-    grid-gap: 33px 30px;
+    grid-gap: 30px 30px;
     justify-content: space-between;
+}
+
+@media (max-width: 768px) {
+
+    .catalog-filter-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .catalog-title {
+        margin-bottom: 20px;
+    }
+
+    .catalog-medicos {
+        grid-template-columns: repeat(auto-fill, 220px);
+        grid-gap: 33px 10px;
+    }
+}
+
+@media (max-width: 576px) {
+
+    .catalog-filter-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .catalog-title {
+        margin-bottom: 20px;
+    }
+
+    .catalog-medicos {
+        grid-template-columns: repeat(auto-fill, 100%);
+    }
 }

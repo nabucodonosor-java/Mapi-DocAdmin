@@ -3,7 +3,7 @@ import React from 'react';
 import './styles.scss';
 
 type Props = {
-    medico: Medico;
+    medico: Medico; 
 }
 
 const MedicoCard = ({ medico }: Props) => (
