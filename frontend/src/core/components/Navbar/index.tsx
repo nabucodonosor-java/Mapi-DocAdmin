@@ -9,7 +9,7 @@ const Navbar = () => {
 
     const handleLogout = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
         event.preventDefault();
-        logout();
+        logout(); 
     }
 
     useEffect(() => {
