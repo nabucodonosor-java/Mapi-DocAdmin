@@ -6,7 +6,7 @@
     font-size: 18px;
     line-height: 25px;
     letter-spacing: -0.015em;
-    color: #407BFF;
+    color: #2d769a;
     margin-top: 15px;
     display: block;
 }
@@ -32,6 +32,12 @@
     text-align: center;
     letter-spacing: -0.015em;
     text-decoration-line: underline;
-    color: #407BFF;
+    color: #2d769a;
     margin-left: 10px;
+}
+
+@media (max-width: 576px) {
+    .login-form {
+        width: 100%;
+    }
 }

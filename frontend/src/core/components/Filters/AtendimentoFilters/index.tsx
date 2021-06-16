@@ -27,7 +27,7 @@ const AtendimentosFilters = ({ cidade, handleChangeCidade, atendimento, handleCh
 
     return (
         <div className="card-base medico-filters-container">
-            <div className="input-search">
+            <div className="medico-input-search">
                 <input
                     type="text"
                     value={cidade}  
@@ -45,7 +45,7 @@ const AtendimentosFilters = ({ cidade, handleChangeCidade, atendimento, handleCh
                 options={atendimentos}
                 getOptionLabel={(option: Atendimento) => option.nome}
                 getOptionValue={(option: Atendimento) => String(option.id)}
-                className="filter-select-container"
+                className="medico-filter-select-container"
                 classNamePrefix="medico-especializacoes-select"
                 placeholder="Pesquisar por Atendimento"
                 inputId="atendimentos"

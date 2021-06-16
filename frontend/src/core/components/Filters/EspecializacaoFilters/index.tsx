@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Especializacao } from 'core/types/Medico';
 import { ReactComponent as SearchIcon } from 'core/assets/images/lupa.svg';
 import { makePrivateRequest } from 'core/utils/request';
-import Select from 'react-select';
+import Select from 'react-select'; 
 import './styles.scss';
 
 
@@ -28,7 +28,7 @@ const EspecializacaoFilters = ({ nome, handleChangeName, especializacao, handleC
 
     return (
         <div className="card-base medico-filters-container">
-            <div className="input-search">
+            <div className="medico-input-search">
                 <input
                     type="text"
                     value={nome}  
@@ -46,7 +46,7 @@ const EspecializacaoFilters = ({ nome, handleChangeName, especializacao, handleC
                 options={especializacoes}
                 getOptionLabel={(option: Especializacao) => option.nome}
                 getOptionValue={(option: Especializacao) => String(option.id)}
-                className="filter-select-container"
+                className="medico-filter-select-container"
                 classNamePrefix="medico-especializacoes-select"
                 placeholder="Pesquisar por Especialização"
                 inputId="especializacoes"

@@ -9,7 +9,7 @@ import './styles.scss';
 
 type FormData = {
     username: string;
-    password: string;
+    password: string; 
 }
 
 type LocationState = {

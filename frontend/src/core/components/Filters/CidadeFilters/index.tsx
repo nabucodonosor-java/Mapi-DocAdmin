@@ -27,7 +27,7 @@ const MedicoFilters = ({ nome, handleChangeName, especialidade, handleChangeEspe
 
     return (
         <div className="card-base medico-filters-container">
-            <div className="input-search">
+            <div className="medico-input-search">
                 <input
                     type="text"
                     value={nome}  
@@ -45,7 +45,7 @@ const MedicoFilters = ({ nome, handleChangeName, especialidade, handleChangeEspe
                 options={especialidades}
                 getOptionLabel={(option: Especialidade) => option.nome}
                 getOptionValue={(option: Especialidade) => String(option.id)}
-                className="filter-select-container"
+                className="medico-filter-select-container"
                 classNamePrefix="medico-especializacoes-select"
                 placeholder="Pesquisar por Especialidade"
                 inputId="especialidades"
