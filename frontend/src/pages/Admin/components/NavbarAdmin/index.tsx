@@ -9,7 +9,7 @@ const NavbarAdmin = () => (
             <li>
                 <NavLink to="/admin/medicos" className="admin-nav-admin-item">
                     Médicos
-                </NavLink>
+                </NavLink> 
             </li>
             <li>
                 <NavLink to="/admin/busca-especializacao" className="admin-nav-admin-item">

@@ -7,6 +7,7 @@ import CardLoader from '../Loaders/MedicoCardLoader';
 import Card from '../Card';
 import Pagination from 'core/components/Pagination';
 import MedicosFilters  from 'core/components/Filters/MedicosFilters';
+import './styles.scss';
 
 const List = () => {
     const [medicoResponse, setMedicoResponse] = useState<MedicoResponse>();
@@ -74,8 +75,8 @@ const List = () => {
 
     return (
         <div>
-            <div className="d-flex justify-content-between">
-                <button className="btn btn-primary btn-lg mr-5" onClick={handleCreate}>
+            <div className="d-flex justify-content-between admin-div-btn">
+                <button className="btn btn-primary btn-lg admin-btn-add mr-5" onClick={handleCreate}>
                     ADICIONAR
                 </button>
                 <MedicosFilters

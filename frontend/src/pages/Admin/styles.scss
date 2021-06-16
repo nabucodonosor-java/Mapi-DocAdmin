@@ -10,3 +10,15 @@
 .admin-list-container {
     margin: 45px 0;
 }
+
+@media (max-width: 768px) {
+    .admin-container {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 576px) {
+    .admin-container {
+        flex-direction: column;
+    }
+}

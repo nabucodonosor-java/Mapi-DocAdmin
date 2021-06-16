@@ -1,16 +1,18 @@
 .input-select {
-    width: 90%;
+    width: 100%;
 }
 
 .input-crm {
-    width: 40%;
+    margin-right: 8px;
+    max-width: 150px;
 }
 
 .input-celular {
-    width: 60%;
+    max-width: 150px;
 }
 
 .medicos-descricoes {
+
     label {
         margin-bottom: 10px;
         font-size: 24px;
@@ -21,6 +23,7 @@
     height: 50px;
     border-radius: 10px !important;
     border: 1px solid #E1E1E1;
+    font-weight: bold;
 }
  
 .especializacoes-select__indicator-separator {

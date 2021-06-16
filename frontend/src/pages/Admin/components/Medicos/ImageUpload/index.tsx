@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import { ReactComponent as UploadPlaceHolder} from 'core/assets/images/upload-placeholder.svg';
 import './styles.scss';
 
-type Props = {
+type Props = { 
     onUploadSuccess: (imgUrl: string) => void;
     medicoImgUrl: string; 
 }
@@ -78,7 +78,7 @@ const ImageUpload = ({ onUploadSuccess, medicoImgUrl }: Props) => {
                    </>
                )}
                {(imgUrl && uploadProgress === 0) && (
-                   <img src={imgUrl} alt={imgUrl} className="uploaded-image" />
+                   <img src={imgUrl} alt={imgUrl} className="uploaded-image"/>
                )}
             </div>
         </div>

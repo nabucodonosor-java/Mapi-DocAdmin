@@ -144,7 +144,7 @@ const Form = () => {
             <BaseForm title={formTitle}>
                 <div className="row">
                     <div className="col-6">
-                            <div className="margin-bottom-30 d-flex">
+                            <div className="margin-bottom-30">
                             <Controller
                                 as={Select}
                                 name="especialidades"
@@ -155,7 +155,7 @@ const Form = () => {
                                 getOptionLabel={(option: Especialidade) => option.nome}
                                 getOptionValue={(option: Especialidade) => String(option.id)}
                                 classNamePrefix="especializacoes-select"
-                                className="input-select mr-2"
+                                className="input-select"
                                 placeholder="Especialidade médica"
                                 inputId="especialidades"
                                 defaultValue=""
@@ -166,16 +166,18 @@ const Form = () => {
                                     Campo obrigatório!
                                 </div>
                                 )}
-                                 <input 
+                            </div>
+
+                            <div className="margin-bottom-30 d-flex">
+
+                                <input 
                                 ref={register({required: false})}
                                 name="crm"
                                 type="text" 
                                 className="form-control input-base input-crm"
                                 placeholder="CRM do médico"
                                 />
-                            </div>
 
-                            <div className="margin-bottom-30">
                                 <input 
                                 ref={register({required: "Campo obrigatório"})}
                                 name="nome"
@@ -211,7 +213,7 @@ const Form = () => {
                                     control={control}
                                     mask="(99) 99999-9999"
                                     id="celular"
-                                    className="form-control input-base"
+                                    className="form-control input-base input-celular"
                                     defaultValue=""
                                     placeholder="Celular"
                                 />

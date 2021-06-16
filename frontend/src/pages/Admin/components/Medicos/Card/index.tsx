@@ -6,20 +6,19 @@ import './styles.scss';
 type Props = {
     medico: Medico;
     onRemove: (medicoId: number) => void;
-}
+} 
 
 const Card = ({ medico, onRemove }: Props) => {
 
-    return (
+    return ( 
         <div className="card-base medico-card-admin">
-            <div className="row">
-                <div className="col-2 text-center border-right py-3">
+                <div className="text-center border-right py-3">
                     <img src={medico.imgUrl}
                     alt={medico.nome} className="medico-card-img-admin" />
                 </div>
                 <div className="col-7 py-3">
                     {medico.especialidades.map(e => e.nome)}
-                    <h3 className="medico-card-name-admin mt-2 mb-2">
+                    <h3 className="card-content medico-card-name-admin mt-2 mb-2">
                         {medico.nome}
                     </h3>
                     <div>
@@ -28,7 +27,8 @@ const Card = ({ medico, onRemove }: Props) => {
                                 {medico?.especializacoes.map(c => " - " + c.nome + " - ")}
                         </span>
                          
-                    </div>       
+                    </div>
+                         
                 </div>
                 <div className="col-3 pt-3 pr-5">
                     <Link
@@ -48,7 +48,6 @@ const Card = ({ medico, onRemove }: Props) => {
                     </button>
                 </div>
             </div>
-        </div>
     )
 }
 
