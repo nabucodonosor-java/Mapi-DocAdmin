@@ -24,6 +24,10 @@ public class Local implements Serializable {
 	@Unique
 	private String nome;
 	
+	private String firstPhone;
+	
+	private String secondPhone;
+	
 	private String cep;
 	
 	private String logradouro;
@@ -101,6 +105,22 @@ public class Local implements Serializable {
 
 	public void setUf(String uf) {
 		this.uf = uf;
+	}
+	
+	public String getFirstPhone() {
+		return firstPhone;
+	}
+	
+	public void setFirstPhone(String firstPhone) {
+		this.firstPhone = firstPhone;
+	}
+	
+	public String getSecondPhone() {
+		return secondPhone;
+	}
+	
+	public void setSecondPhone(String secondPhone) {
+		this.secondPhone = secondPhone;
 	}
 
 	public Set<Medico> getMedicos() {

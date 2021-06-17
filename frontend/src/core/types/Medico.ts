@@ -23,6 +23,11 @@ export type EspecializacaoResponse = {
     totalPages: number;
 }
 
+export type LocalResponse = {
+    content: Local[];
+    totalPages: number;
+}
+
 export type Medico = {
     id: number;
     imgUrl: string;
@@ -70,6 +75,8 @@ export type Local = {
     bairro: string;
     localidade: string;
     uf: string;
+    firstPhone: string;
+    secondPhone: string;
 }
 
 export type Cidade = {

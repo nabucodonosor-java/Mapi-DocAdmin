@@ -28,6 +28,10 @@ public class LocalDto implements Serializable {
 	private String localidade;
 
 	private String uf;
+	
+	private String firstPhone;
+	
+	private String secondPhone;
 
 	public LocalDto() {
 	}
@@ -41,6 +45,8 @@ public class LocalDto implements Serializable {
 		bairro = entity.getBairro();
 		localidade = entity.getLocalidade();
 		uf = entity.getUf();
+		firstPhone = entity.getFirstPhone();
+		secondPhone = entity.getSecondPhone();
 	}
 
 	public Long getId() {
@@ -105,6 +111,22 @@ public class LocalDto implements Serializable {
 
 	public void setUf(String uf) {
 		this.uf = uf;
+	}
+	
+	public String getFirstPhone() {
+		return firstPhone;
+	}
+	
+	public void setFirstPhone(String firstPhone) {
+		this.firstPhone = firstPhone;
+	}
+	
+	public String getSecondPhone() {
+		return secondPhone;
+	}
+	
+	public void setSecondPhone(String secondPhone) {
+		this.secondPhone = secondPhone;
 	}
 
 	public static Page<LocalDto> converter(Page<Local> locais) {

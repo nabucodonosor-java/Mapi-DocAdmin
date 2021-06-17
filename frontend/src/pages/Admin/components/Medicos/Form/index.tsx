@@ -94,11 +94,11 @@ const Form = () => {
             setValue('curriculo', response.data.curriculo);
             setValue('horarioAtendimento', response.data.horarioAtendimento);
             setValue('cep', response.data.cep = searchValue);
-            setValue('logradouro', response.data.logradouro = addressData?.logradouro as string);
+            setValue('logradouro', response.data.logradouro);
             setValue('complemento', response.data.complemento);
-            setValue('bairro', response.data.bairro = addressData?.bairro as string);
-            setValue('localidade', response.data.localidade = addressData?.localidade as string);
-            setValue('uf', response.data.uf = addressData?.uf as string);
+            setValue('bairro', response.data.bairro); 
+            setValue('localidade', response.data.localidade);
+            setValue('uf', response.data.uf);
 
             setValue('especialidades', response.data.especialidades);
             setValue('especializacoes', response.data.especializacoes);
@@ -109,8 +109,7 @@ const Form = () => {
             setMedicoImgUrl(response.data.imgUrl);
         })
        }
-    }, [medicoId, isEditing, setValue, searchValue, addressData?.logradouro,
-        addressData?.bairro, addressData?.localidade, addressData?.uf]);
+    }, [medicoId, isEditing, setValue, searchValue]);
 
     useEffect(() => {
         setIsLoadingEspecialidades(true);
@@ -325,6 +324,7 @@ const Form = () => {
                                     placeholder="CEP"
                                     value={searchValue}
                                     onChange={event => setSearchValue(event.target.value)}
+                                    id="cep"
                                     />
 
 
@@ -335,6 +335,7 @@ const Form = () => {
                                     className="form-control input-base mr-2"
                                     placeholder="Logradouro"
                                     value={addressData?.logradouro}
+                                    id="logradouro"
                                     />
 
                                 <input 
@@ -356,6 +357,7 @@ const Form = () => {
                                     className="form-control input-base mr-2"
                                     placeholder="Bairro"
                                     value={addressData?.bairro}
+                                    id="bairro"
                                     />
 
                                 <input
@@ -365,6 +367,7 @@ const Form = () => {
                                     className="form-control input-base mr-2"
                                     placeholder="Cidade"
                                     value={addressData?.localidade}
+                                    id="localidade"
                                     />
 
                                 <input
@@ -374,6 +377,7 @@ const Form = () => {
                                     className="form-control input-base input-uf"
                                     placeholder="Uf"
                                     value={addressData?.uf}
+                                    id="uf"
                                     />
 
                                 

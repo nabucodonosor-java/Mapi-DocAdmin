@@ -78,6 +78,8 @@ public class LocalService {
 		entity.setComplemento(dto.getComplemento());
 		entity.setBairro(dto.getBairro());
 		entity.setLocalidade(dto.getLocalidade());
-		entity.setUf(dto.getUf());	
+		entity.setUf(dto.getUf());
+		entity.setFirstPhone(dto.getFirstPhone());
+		entity.setSecondPhone(dto.getSecondPhone());
 	}
 }

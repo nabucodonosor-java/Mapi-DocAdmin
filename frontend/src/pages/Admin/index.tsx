@@ -7,6 +7,7 @@ import Especialidade from './components/Especialidade';
 import Atendimento from './components/Atendimento';
 import Especializacao from './components/Especializacao';
 import Cidade from './components/Cidade';
+import Local from './components/Local';
 
 import './styles.scss';
 
@@ -31,7 +32,7 @@ const Admin = () => (
                    <Atendimento />
                 </PrivateRoute>
                 <PrivateRoute path="/admin/local">
-                   <h1>Local</h1>
+                   <Local />
                 </PrivateRoute>
                 <PrivateRoute path="/admin/users" allowedRoutes={['ROLE_ADMIN']}>
                     <h1>Users</h1>
