@@ -1,0 +1,54 @@
+.admin-cidade-form {
+    display: flex;
+}
+
+.input-uf {
+    max-width: 100px;
+}
+
+.select-atendimentos {
+    height: 100px;
+}
+
+.admin-local-title {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.medicos-descricoes {
+
+    label {
+        margin-bottom: 10px;
+        font-size: 24px;
+    }
+}
+
+.especializacoes-select__control {
+    height: 50px;
+    border-radius: 10px !important;
+    border: 1px solid #E1E1E1;
+    font-weight: bold;
+}
+ 
+.especializacoes-select__indicator-separator {
+    display: none;
+}
+
+.especializacoes-select__placeholder {
+    color: #9E9E9E; 
+}
+
+.atendimentos-select__control {
+    height: 150px;
+    border-radius: 10px !important;
+    border: 1px solid #E1E1E1;
+    font-weight: bold;
+}
+ 
+.atendimentos-select__indicator-separator {
+    display: none;
+}
+
+.atendimentos-select__placeholder {
+    color: #9E9E9E; 
+}

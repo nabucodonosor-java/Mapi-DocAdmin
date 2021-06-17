@@ -1,16 +1,17 @@
-.medico-filters-container {
-    width: 70%;
+.especialidade-filters-container {
+    width: 100%;
     padding: 5px 10px;
     border-radius: 10px;
     display: flex;
     justify-content: space-between;
 }
  
-.medico-input-search {
+.especialidade-input-search {
     display: flex;
     align-items: center;
     border-bottom: 1px solid #E1E1E1;
-    flex: 1; 
+    flex: 1;
+    margin-right: 10px;
 
     input {
         border: none;
@@ -22,28 +23,6 @@
         &:focus {
             box-shadow: none;
         }
-    }
-}
-
-.medico-filter-select-container {
-    flex: 1;
-    margin-left: 50px;
-    margin-right: 50px;
-
-    .medico-especializacoes-select__control {
-        height: 30px;
-        border: none;
-        border-radius: 0;
-        border-bottom: 1px solid #E1E1E1;
-    }
-    
-    .medico-especializacoes-select__indicator-separator {
-        display: none;
-    }
-    
-    .medico-especializacoes-select__placeholder {
-        color: #9E9E9E;
-        font-size: 14px;
     }
 }
 

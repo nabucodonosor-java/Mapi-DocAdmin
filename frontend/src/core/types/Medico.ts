@@ -13,6 +13,11 @@ export type AtendimentoResponse = {
     totalPages: number;
 }
 
+export type CidadeResponse = {
+    content: Cidade[];
+    totalPages: number;
+}
+
 export type EspecializacaoResponse = {
     content: Especializacao[];
     totalPages: number;
