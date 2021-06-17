@@ -13,8 +13,12 @@ export type Medico = {
     dataNascimento: Date;
     curriculo: string;
     horarioAtendimento: string;
-    cidade: string;
-    local: string;
+    cep: string;
+    logradouro: string;
+    complemento: string;
+    bairro: string;
+    localidade: string;
+    uf: string;
     especializacoes: Especializacao[];
     especialidades: Especialidade[];
     atendimentos: Atendimento[];
@@ -40,6 +44,12 @@ export type Atendimento = {
 export type Local = {
     id: number;
     nome: string;
+    cep: string;
+    logradouro: string;
+    complemento: string;
+    bairro: string;
+    localidade: string;
+    uf: string;
 }
 
 export type Cidade = {

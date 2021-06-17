@@ -138,8 +138,12 @@ public class MedicoService {
 		entity.setDataNascimento(dto.getDataNascimento());
 		entity.setCurriculo(dto.getCurriculo());
 		entity.setHorarioAtendimento(dto.getHorarioAtendimento());
-		entity.setCidade(dto.getCidade());
-		entity.setLocal(dto.getLocal());
+		entity.setCep(dto.getCep());
+		entity.setLogradouro(dto.getLogradouro());
+		entity.setComplemento(dto.getComplemento());
+		entity.setBairro(dto.getBairro());
+		entity.setLocalidade(dto.getLocalidade());
+		entity.setUf(dto.getUf());
 		entity.setVisitaAgendada(dto.getVisitaAgendada());
 		
 		entity.getEspecializacoes().clear();

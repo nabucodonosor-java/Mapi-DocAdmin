@@ -53,10 +53,19 @@ public class Medico implements Serializable {
 
 	@Column(columnDefinition = "TEXT")
 	private String horarioAtendimento;
+	
+	private String cep;
+	
+	private String logradouro;
+	
+	private String complemento;
+	
+	private String bairro;
+	
+	private String localidade;
+	
+	private String uf;
 
-	private String cidade;
-
-	private String local;
 
 	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
 	private Instant visitaAgendada;
@@ -80,6 +89,8 @@ public class Medico implements Serializable {
 	@ManyToMany
 	@JoinTable(name = "tb_medico_cidade", joinColumns = @JoinColumn(name = "medico_id"), inverseJoinColumns = @JoinColumn(name = "cidade_id"))
 	private Set<Cidade> cidades = new HashSet<>();
+
+	
 
 	public Long getId() {
 		return id;
@@ -153,20 +164,60 @@ public class Medico implements Serializable {
 		this.horarioAtendimento = horarioAtendimento;
 	}
 
-	public String getCidade() {
-		return cidade;
+	public String getCep() {
+		return cep;
 	}
 
-	public void setCidade(String cidade) {
-		this.cidade = cidade;
+	public void setCep(String cep) {
+		this.cep = cep;
 	}
 
-	public String getLocal() {
-		return local;
+	public String getLogradouro() {
+		return logradouro;
 	}
 
-	public void setLocal(String local) {
-		this.local = local;
+	public void setLogradouro(String logradouro) {
+		this.logradouro = logradouro;
+	}
+
+	public String getComplemento() {
+		return complemento;
+	}
+
+	public void setComplemento(String complemento) {
+		this.complemento = complemento;
+	}
+
+	public String getBairro() {
+		return bairro;
+	}
+
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
+	}
+
+	public String getLocalidade() {
+		return localidade;
+	}
+
+	public void setLocalidade(String localidade) {
+		this.localidade = localidade;
+	}
+
+	public String getUf() {
+		return uf;
+	}
+
+	public void setUf(String uf) {
+		this.uf = uf;
+	}
+
+	public Instant getVisitaAgendada() {
+		return visitaAgendada;
+	}
+
+	public void setVisitaAgendada(Instant visitaAgendada) {
+		this.visitaAgendada = visitaAgendada;
 	}
 
 	public Set<Especializacao> getEspecializacoes() {
@@ -187,14 +238,6 @@ public class Medico implements Serializable {
 
 	public Set<Cidade> getCidades() {
 		return cidades;
-	}
-
-	public Instant getVisitaAgendada() {
-		return visitaAgendada;
-	}
-
-	public void setVisitaAgendada(Instant visitaAgendada) {
-		this.visitaAgendada = visitaAgendada;
 	}
 
 	@Override

@@ -36,12 +36,23 @@ public class MedicoDto implements Serializable {
 
 	@PastOrPresent(message = "A data não pode ser futura")
 	private Instant dataNascimento;
-	
+
 	private String curriculo;
 	private String horarioAtendimento;
-	private String cidade;
-	private String local;
-	
+
+	@NotBlank(message = "Campo obrigatório")
+	private String cep;
+
+	private String logradouro;
+
+	private String complemento;
+
+	private String bairro;
+
+	private String localidade;
+
+	private String uf;
+
 	private Instant visitaAgendada;
 
 	private List<EspecializacaoDto> especializacoes = new ArrayList<>();
@@ -49,9 +60,9 @@ public class MedicoDto implements Serializable {
 	private List<EspecialidadeDto> especialidades = new ArrayList<>();
 
 	private List<AtendimentoDto> atendimentos = new ArrayList<>();
-	
+
 	private List<LocalDto> locais = new ArrayList<>();
-	
+
 	private List<CidadeDto> cidades = new ArrayList<>();
 
 	public MedicoDto() {
@@ -67,32 +78,30 @@ public class MedicoDto implements Serializable {
 		dataNascimento = entity.getDataNascimento();
 		curriculo = entity.getCurriculo();
 		horarioAtendimento = entity.getHorarioAtendimento();
-		cidade = entity.getCidade();
-		local = entity.getLocal();
-		visitaAgendada = entity.getVisitaAgendada();	
+		cep = entity.getCep();
+		logradouro = entity.getLogradouro();
+		complemento = entity.getComplemento();
+		bairro = entity.getBairro();
+		localidade = entity.getLocalidade();
+		uf = entity.getUf();
+		visitaAgendada = entity.getVisitaAgendada();
 	}
 
-	public MedicoDto(Medico entity, Set<Especializacao> especializacoes, 
-			Set<Especialidade> especialidades, Set<Atendimento> atendimentos, Set<Cidade> cidades,
-			Set<Local> locais) {
-		
+	public MedicoDto(Medico entity, Set<Especializacao> especializacoes, Set<Especialidade> especialidades,
+			Set<Atendimento> atendimentos, Set<Cidade> cidades, Set<Local> locais) {
+
 		this(entity);
-		
-		especializacoes.forEach(especializacao -> 
-		this.getEspecializacoes().add(new EspecializacaoDto(especializacao)));
-		
-		especialidades.forEach(especialidade -> 
-		this.getEspecialidades().add(new EspecialidadeDto(especialidade)));
-		
-		atendimentos.forEach(atendimento -> 
-		this.getAtendimentos().add(new AtendimentoDto(atendimento)));
-		
-		cidades.forEach(cidade -> 
-		this.getCidades().add(new CidadeDto(cidade)));
-		
-		locais.forEach(local -> 
-		this.getLocais().add(new LocalDto(local)));
-		
+
+		especializacoes.forEach(especializacao -> this.getEspecializacoes().add(new EspecializacaoDto(especializacao)));
+
+		especialidades.forEach(especialidade -> this.getEspecialidades().add(new EspecialidadeDto(especialidade)));
+
+		atendimentos.forEach(atendimento -> this.getAtendimentos().add(new AtendimentoDto(atendimento)));
+
+		cidades.forEach(cidade -> this.getCidades().add(new CidadeDto(cidade)));
+
+		locais.forEach(local -> this.getLocais().add(new LocalDto(local)));
+
 	}
 
 	public Long getId() {
@@ -167,20 +176,60 @@ public class MedicoDto implements Serializable {
 		this.horarioAtendimento = horarioAtendimento;
 	}
 
-	public String getCidade() {
-		return cidade;
+	public String getCep() {
+		return cep;
 	}
 
-	public void setCidade(String cidade) {
-		this.cidade = cidade;
+	public void setCep(String cep) {
+		this.cep = cep;
 	}
 
-	public String getLocal() {
-		return local;
+	public String getLogradouro() {
+		return logradouro;
 	}
 
-	public void setLocal(String local) {
-		this.local = local;
+	public void setLogradouro(String logradouro) {
+		this.logradouro = logradouro;
+	}
+
+	public String getComplemento() {
+		return complemento;
+	}
+
+	public void setComplemento(String complemento) {
+		this.complemento = complemento;
+	}
+
+	public String getBairro() {
+		return bairro;
+	}
+
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
+	}
+
+	public String getLocalidade() {
+		return localidade;
+	}
+
+	public void setLocalidade(String localidade) {
+		this.localidade = localidade;
+	}
+
+	public String getUf() {
+		return uf;
+	}
+
+	public void setUf(String uf) {
+		this.uf = uf;
+	}
+
+	public Instant getVisitaAgendada() {
+		return visitaAgendada;
+	}
+
+	public void setVisitaAgendada(Instant visitaAgendada) {
+		this.visitaAgendada = visitaAgendada;
 	}
 
 	public List<EspecializacaoDto> getEspecializacoes() {
@@ -202,16 +251,8 @@ public class MedicoDto implements Serializable {
 	public List<CidadeDto> getCidades() {
 		return cidades;
 	}
-	
-	public Instant getVisitaAgendada() {
-		return visitaAgendada;
-	}
 
-	public void setVisitaAgendada(Instant visitaAgendada) {
-		this.visitaAgendada = visitaAgendada;
-	}
-	
 	public static Page<MedicoDto> converter(Page<Medico> list) {
 		return list.map(MedicoDto::new);
-	}	
+	}
 }

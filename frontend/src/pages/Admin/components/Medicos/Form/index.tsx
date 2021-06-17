@@ -9,6 +9,7 @@ import BaseForm from '../../BaseForm';
 import Select from 'react-select';
 import ImageUpload from '../ImageUpload';
 import InputMask from 'react-input-mask';
+import axios from 'axios';
 
 export type FormState = {
     id: number;
@@ -20,8 +21,12 @@ export type FormState = {
     dataNascimento: Date;
     curriculo: string;
     horarioAtendimento: string;
-    cidade: string;
-    local: string;
+    cep: string;
+    logradouro: string;
+    complemento: string;
+    bairro: string;
+    localidade: string;
+    uf: string;
     visitaAgendada: Date;
     especializacoes: Especializacao[];
     especialidades: Especialidade[];
@@ -32,6 +37,16 @@ export type FormState = {
 
 type ParamsType = {
     medicoId: string;
+}
+
+const BASE_URL = 'https://viacep.com.br/ws';
+
+type Address = {
+    logradouro: string;
+    complemento: string;
+    bairro: string;
+    localidade: string;
+    uf: string;
 }
 
 const Form = () => {
@@ -54,7 +69,19 @@ const Form = () => {
     const [uploadedImgUrl, setUploadedImgUrl] = useState('');
     const [medicoImgUrl, setMedicoImgUrl] = useState('');
     const isEditing = medicoId !== 'create';
-    const formTitle = isEditing ? 'Editar Médico' : 'Cadastrar Médico'
+    const formTitle = isEditing ? 'Editar Médico' : 'Cadastrar Médico';
+
+    const [searchValue, setSearchValue] = useState('');
+    const [addressData, setAddressData] = useState<Address>();
+
+    const handleSubmitCep = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setAddressData(undefined);
+
+    axios(`${BASE_URL}/${searchValue}/json`)
+    .then(response => setAddressData(response.data))
+    .catch(() => console.error('ERRO!'))
+  }
 
     useEffect(() => {
        if (isEditing) {
@@ -67,8 +94,8 @@ const Form = () => {
             setValue('email', response.data.email);
             setValue('curriculo', response.data.curriculo);
             setValue('horarioAtendimento', response.data.horarioAtendimento);
-            setValue('cidade', response.data.cidade);
-            setValue('local', response.data.local);
+            setValue('cep', response.data.cep = searchValue);
+            setValue('logradouro', response.data.logradouro = addressData?.logradouro as string)
 
             setValue('especialidades', response.data.especialidades);
             setValue('especializacoes', response.data.especializacoes);
@@ -79,7 +106,7 @@ const Form = () => {
             setMedicoImgUrl(response.data.imgUrl);
         })
        }
-    }, [medicoId, isEditing, setValue]);
+    }, [medicoId, isEditing, setValue, searchValue, addressData?.logradouro]);
 
     useEffect(() => {
         setIsLoadingEspecialidades(true);
@@ -140,7 +167,7 @@ const Form = () => {
     }
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)} onBlur={handleSubmitCep}>
             <BaseForm title={formTitle}>
                 <div className="row">
                     <div className="col-6">
@@ -280,20 +307,27 @@ const Form = () => {
                                 defaultValue=""
                                 isMulti
                                 />
-                                <input 
-                                ref={register({required: false})}
-                                name="local"
-                                type="text" 
-                                className="form-control input-base mb-2"
-                                placeholder="Local de visita"
-                                />
-                                 <input 
-                                ref={register({required: false})}
-                                name="cidade"
-                                type="text" 
-                                className="form-control input-base mb-2"
-                                placeholder="Cidade de visita"
-                                />
+                               
+                               <input
+                                    ref={register({required: false})}
+                                    name="cep"
+                                    type="text" 
+                                    className="form-control input-base"
+                                    placeholder="CEP somente números"
+                                    value={searchValue}
+                                    onChange={event => setSearchValue(event.target.value)}
+                                    />
+
+                                <input
+                                    ref={register({required: false})}
+                                    name="logradouro"
+                                    type="text" 
+                                    className="form-control input-base"
+                                    placeholder="Logradouro"
+                                    value={addressData?.logradouro}
+                                    />
+                               
+
                             <Controller
                                 as={Select}
                                 name="atendimentos"

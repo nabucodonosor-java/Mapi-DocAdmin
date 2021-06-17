@@ -39,20 +39,20 @@ public class LocalService {
 	
 	@Transactional
 	public LocalDto insert(LocalDto dto) {
-		Local local = new Local();
-		local.setNome(dto.getNome());
-		local = repository.save(local);
-		return new LocalDto(local);
+		Local entity = new Local();
+		copyToEntity(dto, entity);
+		entity = repository.save(entity);
+		return new LocalDto(entity);
 	}
-	
+
 	@Transactional
 	public LocalDto update(Long id, LocalDto dto) {
 		try {
 			
-			Local local = repository.getOne(id);
-			local.setNome(dto.getNome());
-			local = repository.save(local);
-			return new LocalDto(local);
+			Local entity = repository.getOne(id);
+			copyToEntity(dto, entity);
+			entity = repository.save(entity);
+			return new LocalDto(entity);
 			
 		} catch (EntityNotFoundException e) {
 			throw new EntidadeNaoEncontradaException("Local não encontrado!");
@@ -69,5 +69,15 @@ public class LocalService {
 		} catch (DataIntegrityViolationException e) {
 			throw new DBException("Violação de integridade do DB");
 		}
+	}
+	
+	private void copyToEntity(LocalDto dto, Local entity) {
+		entity.setNome(dto.getNome());
+		entity.setCep(dto.getCep());
+		entity.setLogradouro(dto.getLogradouro());
+		entity.setComplemento(dto.getComplemento());
+		entity.setBairro(dto.getBairro());
+		entity.setLocalidade(dto.getLocalidade());
+		entity.setUf(dto.getUf());	
 	}
 }
