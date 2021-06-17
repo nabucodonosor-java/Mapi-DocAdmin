@@ -1,0 +1,82 @@
+.upload-button-container {
+    label {
+        background: #9E9E9E;
+        border-radius: 10px;
+        color: #FFF;
+        font-weight: bold;
+        font-size: 14px;
+        line-height: 19px;
+        text-align: center;
+        letter-spacing: -0.015em;
+        padding: 10px 30px;
+        cursor: pointer;
+    }
+}
+
+.upload-text-helper {
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 19px;
+    letter-spacing: -0.015em;
+}
+
+.upload-placeholder {
+    .upload-progress-container {
+        position: absolute;
+        bottom: 10px;
+        left: 25px;
+        height: 10px;
+        background: #E1E1E1;
+        width: 175px;
+        border-radius: 10px;
+    }
+
+    .upload-progress {
+        background: #2d769a;
+        border-radius: 10px;
+        height: 10px;
+        // width: 70%;
+    }
+
+    .uploaded-image {
+        width: 200px;
+        height: 200px;
+    }
+}
+
+@media (max-width: 768px) {
+    .upload-button-container label {
+        word-wrap: none;
+        width: 140px;
+    }
+
+    .upload-placeholder {
+        .upload-progress-container {
+            position: absolute;
+            bottom: 20px;
+            left: 25px;
+            height: 10px;
+            background: #E1E1E1;
+            width: 100px;
+            border-radius: 10px;
+        }
+    
+        .upload-progress {
+            background: #2d769a;
+            border-radius: 10px;
+            height: 10px;
+        }
+    
+        .uploaded-image {
+            width: 100px;
+            height: 100px;
+        }
+    }
+}
+
+@media (max-width: 576px) {
+    .upload-button-container label {
+        word-wrap: none;
+        width: 100px;
+    }
+}

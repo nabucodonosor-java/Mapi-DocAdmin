@@ -3,6 +3,11 @@ export type MedicoResponse = {
     totalPages: number;
 }
 
+export type EspecialidadeResponse = {
+    content: Especialidade[];
+    totalPages: number;
+}
+
 export type Medico = {
     id: number;
     imgUrl: string;

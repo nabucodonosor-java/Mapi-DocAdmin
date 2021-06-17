@@ -3,6 +3,11 @@ import { Switch } from 'react-router';
 import NavbarAdmin from './components/NavbarAdmin';
 import Medicos from './components/Medicos';
 import PrivateRoute from 'core/components/Routes/PrivateRoute';
+import Especialidade from './components/Especialidade';
+import Especializacao from './components/Especializacao';
+import Cidade from './components/Cidade';
+import Atendimento from './components/Atendimento';
+import Local from './components/Local';
 import './styles.scss';
 
 const Admin = () => (
@@ -13,14 +18,20 @@ const Admin = () => (
                 <PrivateRoute path="/admin/medicos">
                     <Medicos />
                 </PrivateRoute>
-                <PrivateRoute path="/admin/busca-especializacao">
-                    <Medicos />
+                <PrivateRoute path="/admin/especialidade">
+                    <Especialidade />
                 </PrivateRoute>
-                <PrivateRoute path="/admin/busca-atendimento">
-                    <Medicos />
+                <PrivateRoute path="/admin/especializacao">
+                    <Especializacao />
                 </PrivateRoute>
-                <PrivateRoute path="/admin/busca-cidade">
-                    <h1>Cidades</h1>
+                <PrivateRoute path="/admin/cidade">
+                   <Cidade />
+                </PrivateRoute>
+                <PrivateRoute path="/admin/atendimento">
+                   <Atendimento />
+                </PrivateRoute>
+                <PrivateRoute path="/admin/local">
+                   <Local />
                 </PrivateRoute>
                 <PrivateRoute path="/admin/users" allowedRoutes={['ROLE_ADMIN']}>
                     <h1>Users</h1>
