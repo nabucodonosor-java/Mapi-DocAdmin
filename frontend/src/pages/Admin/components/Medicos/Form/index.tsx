@@ -43,7 +43,6 @@ const BASE_URL = 'https://viacep.com.br/ws';
 
 type Address = {
     logradouro: string;
-    complemento: string;
     bairro: string;
     localidade: string;
     uf: string;
@@ -95,7 +94,11 @@ const Form = () => {
             setValue('curriculo', response.data.curriculo);
             setValue('horarioAtendimento', response.data.horarioAtendimento);
             setValue('cep', response.data.cep = searchValue);
-            setValue('logradouro', response.data.logradouro = addressData?.logradouro as string)
+            setValue('logradouro', response.data.logradouro = addressData?.logradouro as string);
+            setValue('complemento', response.data.complemento);
+            setValue('bairro', response.data.bairro = addressData?.bairro as string);
+            setValue('localidade', response.data.localidade = addressData?.localidade as string);
+            setValue('uf', response.data.uf = addressData?.uf as string);
 
             setValue('especialidades', response.data.especialidades);
             setValue('especializacoes', response.data.especializacoes);
@@ -106,7 +109,8 @@ const Form = () => {
             setMedicoImgUrl(response.data.imgUrl);
         })
        }
-    }, [medicoId, isEditing, setValue, searchValue, addressData?.logradouro]);
+    }, [medicoId, isEditing, setValue, searchValue, addressData?.logradouro,
+        addressData?.bairro, addressData?.localidade, addressData?.uf]);
 
     useEffect(() => {
         setIsLoadingEspecialidades(true);
@@ -285,7 +289,7 @@ const Form = () => {
                                 getOptionLabel={(option: Local) => option.nome}
                                 getOptionValue={(option: Local) => String(option.id)}
                                 classNamePrefix="especializacoes-select"
-                                className="input-select mb-2"
+                                className="input-select mb-4"
                                 placeholder="Locais de Atendimento"
                                 inputId="locais"
                                 defaultValue=""
@@ -301,34 +305,81 @@ const Form = () => {
                                 getOptionLabel={(option: Cidade) => option.nome}
                                 getOptionValue={(option: Cidade) => String(option.id)}
                                 classNamePrefix="especializacoes-select"
-                                className="input-select mb-2"
+                                className="input-select mb-4"
                                 placeholder="Cidades de Atendimento"
                                 inputId="cidades"
                                 defaultValue=""
                                 isMulti
                                 />
+
+                                <h6 className="admin-local-title">Informações sobre local de visita</h6>
+
+                               <div className="d-flex">
                                
                                <input
+                               
                                     ref={register({required: false})}
                                     name="cep"
                                     type="text" 
-                                    className="form-control input-base"
-                                    placeholder="CEP somente números"
+                                    className="form-control input-base input-cep mr-2"
+                                    placeholder="CEP"
                                     value={searchValue}
                                     onChange={event => setSearchValue(event.target.value)}
                                     />
+
 
                                 <input
                                     ref={register({required: false})}
                                     name="logradouro"
                                     type="text" 
-                                    className="form-control input-base"
+                                    className="form-control input-base mr-2"
                                     placeholder="Logradouro"
                                     value={addressData?.logradouro}
                                     />
-                               
 
-                            <Controller
+                                <input 
+                                    ref={register({required: false})}
+                                    name="complemento"
+                                    type="text" 
+                                    className="form-control input-base input-complemento"
+                                    placeholder="Compl"
+                                />
+                               
+                               </div>
+
+                               <div className="d-flex mt-2 mb-4">
+
+                                <input
+                                    ref={register({required: false})}
+                                    name="bairro"
+                                    type="text" 
+                                    className="form-control input-base mr-2"
+                                    placeholder="Bairro"
+                                    value={addressData?.bairro}
+                                    />
+
+                                <input
+                                    ref={register({required: false})}
+                                    name="localidade"
+                                    type="text" 
+                                    className="form-control input-base mr-2"
+                                    placeholder="Cidade"
+                                    value={addressData?.localidade}
+                                    />
+
+                                <input
+                                    ref={register({required: false})}
+                                    name="uf"
+                                    type="text" 
+                                    className="form-control input-base input-uf"
+                                    placeholder="Uf"
+                                    value={addressData?.uf}
+                                    />
+
+                                
+                               
+                               </div>
+                               <Controller
                                 as={Select}
                                 name="atendimentos"
                                 rules={{ required: false }}
@@ -337,29 +388,33 @@ const Form = () => {
                                 options={atendimentos}
                                 getOptionLabel={(option: Atendimento) => option.nome}
                                 getOptionValue={(option: Atendimento) => String(option.id)}
-                                classNamePrefix="especializacoes-select"
-                                className="input-select mr-2"
+                                classNamePrefix="atendimentos-select"
+                                className="input-select mr-2 mb-2"
                                 placeholder="Dias e Períodos de Atendimento"
                                 inputId="atendimentos"
                                 defaultValue=""
                                 isMulti
                                 />
-                        <label>Horários de Atendimento</label>
+                               
+                            
+                    </div>
+
+                    
+                        <h6>Horários de Atendimento</h6>
                         <textarea
                         ref={register({ required: false})}
                         name="horarioAtendimento"
-                        className="form-control input-base mb-3"
+                        className="form-control input-base mb-3 mt-2"
                         placeholder="Horário de Atendimento"
                         cols={30} 
                         rows={10}    
                         />
-                    </div>
      
                     <h6>Currículo e Observações</h6>
                             <textarea
                                 ref={register({ required: false})}
                                 name="curriculo"
-                                className="form-control input-base mb-2 mt-2"
+                                className="form-control input-base mt-2"
                                 placeholder="Currículo"
                                 cols={30} 
                                 rows={10}    
