@@ -5,6 +5,7 @@ import Medicos from './components/Medicos';
 import PrivateRoute from 'core/components/Routes/PrivateRoute';
 import Especialidade from './components/Especialidade';
 import Atendimento from './components/Atendimento';
+import Especializacao from './components/Especializacao';
 
 
 import './styles.scss';
@@ -21,7 +22,7 @@ const Admin = () => (
                     <Especialidade />
                 </PrivateRoute>
                 <PrivateRoute path="/admin/especializacao">
-                    <h1>Especialização</h1>
+                    <Especializacao />
                 </PrivateRoute>
                 <PrivateRoute path="/admin/cidade">
                    <h1>Cidade</h1>
