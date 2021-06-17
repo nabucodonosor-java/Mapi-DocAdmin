@@ -8,6 +8,11 @@ export type EspecialidadeResponse = {
     totalPages: number;
 }
 
+export type AtendimentoResponse = {
+    content: Atendimento[];
+    totalPages: number;
+}
+
 export type Medico = {
     id: number;
     imgUrl: string;

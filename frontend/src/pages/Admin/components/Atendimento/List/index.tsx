@@ -1,74 +1,66 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { Especialidade, MedicoResponse } from 'core/types/Medico';
+import { AtendimentoResponse } from 'core/types/Medico';
 import { useHistory } from 'react-router-dom';
 import { makePrivateRequest } from 'core/utils/request';
 import { toast } from 'react-toastify';
 import CardLoader from '../Loaders/MedicoCardLoader';
 import Card from '../Card';
 import Pagination from 'core/components/Pagination';
-import MedicosFilters  from 'core/components/Filters/MedicosFilters';
+import AtendimentoFilters  from 'core/components/Filters/AtendimentoFilters';
 import './styles.scss';
 
 const List = () => {
-    const [medicoResponse, setMedicoResponse] = useState<MedicoResponse>();
+    const [atendimentoResponse, setAtendimentoResponse] = useState<AtendimentoResponse>();
     const [isLoading, setIsLoading] = useState(false);
     const [activePage, setActivePage] = useState(0);
     const history = useHistory();
     const [nome, setNome] = useState('');
-    const [especialidade, setEspecialidade] = useState<Especialidade>();
 
-    const getMedicos = useCallback(() => {
+    const getAtendimentos = useCallback(() => {
         const params = {
             page: activePage,
             linesPerPage: 20,
-            direction: 'DESC',
+            direction: 'ASC',
             orderBy: 'id',
-            nome,
-            especialidadeId: especialidade?.id
+            nome
         }
         setIsLoading(true);
-        makePrivateRequest({ url: '/medicos', params })
-       .then(response => setMedicoResponse(response.data))
+        makePrivateRequest({ url: '/atendimento', params })
+       .then(response => setAtendimentoResponse(response.data))
        .finally(() => {
         setIsLoading(false);
        })
-    }, [activePage, nome, especialidade]);
+    }, [activePage, nome]);
 
     useEffect(() => {
-        getMedicos();    
-    }, [getMedicos]);
+        getAtendimentos();    
+    }, [getAtendimentos]);
     
     const handleChangeName = (name: string) => {
         setActivePage(0);
         setNome(name);
     }
 
-    const handleChangeEspecialidade = (especialidade: Especialidade) => {
-        setActivePage(0);
-        setEspecialidade(especialidade);
-    }
-
     const clearFilters = () => {
         setActivePage(0);
-        setEspecialidade(undefined);
         setNome('');
     }
 
     const handleCreate = () => { 
-        history.push('/admin/medicos/create'); 
+        history.push('/admin/atendimento/create'); 
     }
 
-    const onRemove = (medicoId: number) => {
-        const confirm = window.confirm('Deseja realmente excluir este produto?');
+    const onRemove = (atendimentoId: number) => {
+        const confirm = window.confirm('Deseja realmente excluir este atendimento?');
 
         if (confirm) {
-            makePrivateRequest({ url: `/medicos/${medicoId}`, method: 'DELETE' })
+            makePrivateRequest({ url: `/atendimento/${atendimentoId}`, method: 'DELETE' })
             .then(() => {
-                toast.info('Médico deletado com sucesso!');
-                getMedicos();
+                toast.info('Atendimento deletado com sucesso!');
+                getAtendimentos();
             })
             .catch(() => {
-                toast.error('Erro ao deletar médico');
+                toast.error('Erro ao deletar atendimento');
             })
         }
     }
@@ -76,27 +68,26 @@ const List = () => {
     return (
         <div>
             <div className="d-flex justify-content-between admin-div-btn">
-                <button className="btn btn-primary btn-lg admin-btn-add mr-5" onClick={handleCreate}>
+                <button className="btn btn-primary btn-lg admin-btn-add mr-3" onClick={handleCreate}>
                     ADICIONAR
                 </button>
-                <MedicosFilters
-                    nome={nome}
-                    especialidade={especialidade}
-                    handleChangeEspecialidade={handleChangeEspecialidade}
-                    handleChangeName={handleChangeName}
-                    clearFilters={clearFilters}
-                    />
+
+                <AtendimentoFilters
+                nome={nome}
+                handleChangeName={handleChangeName}
+                clearFilters={clearFilters}
+                />
             </div>
             
             <div className="admin-list-container">
                 {isLoading ? <CardLoader /> : (
-                    medicoResponse?.content.map(medico => (
-                        <Card medico={medico} key={medico.id} onRemove={onRemove} />
+                    atendimentoResponse?.content.map(atendimento => (
+                        <Card atendimento={atendimento} key={atendimento.id} onRemove={onRemove} />
                     ))
                 )}
-                {medicoResponse && (
+                {atendimentoResponse && (
                 <Pagination 
-                totalPages={medicoResponse.totalPages}
+                totalPages={atendimentoResponse.totalPages}
                 activePage={activePage}
                 onChange={page => setActivePage(page)}
                 />

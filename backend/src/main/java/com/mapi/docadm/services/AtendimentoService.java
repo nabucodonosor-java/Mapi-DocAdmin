@@ -25,8 +25,8 @@ public class AtendimentoService {
 	private AtendimentoRepository repository;
 	
 	@Transactional(readOnly = true)
-	public Page<AtendimentoDto> findAllPaged(PageRequest pageRequest) {
-		Page<Atendimento> page = repository.findAll(pageRequest);
+	public Page<AtendimentoDto> findAllPaged(PageRequest pageRequest, String nome) {
+		Page<Atendimento> page = repository.find(nome, pageRequest);
 		return AtendimentoDto.converter(page);
 	}
 	

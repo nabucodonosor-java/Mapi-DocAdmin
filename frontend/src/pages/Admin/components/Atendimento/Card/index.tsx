@@ -1,48 +1,34 @@
 import React from 'react';
-import { Medico } from 'core/types/Medico';
+import { Atendimento } from 'core/types/Medico';
 import { Link } from 'react-router-dom';
 import './styles.scss';
 
 type Props = {
-    medico: Medico;
-    onRemove: (medicoId: number) => void;
+    atendimento: Atendimento;
+    onRemove: (atendimentoId: number) => void;
 } 
 
-const Card = ({ medico, onRemove }: Props) => {
+const Card = ({ atendimento, onRemove }: Props) => {
 
     return ( 
-        <div className="card-base medico-card-admin">
-                <div className="text-center border-right py-3">
-                    <img src={medico.imgUrl}
-                    alt={medico.nome} className="medico-card-img-admin" />
-                </div>
-                <div className="col-7 py-3">
-                    {medico.especialidades.map(e => e.nome)}
-                    <h3 className="card-content medico-card-name-admin mt-2 mb-2">
-                        {medico.nome}
-                    </h3>
-                    <div>
-                        
-                        <span className="badge rounded-pill bg-secondary mr-2">
-                                {medico?.especializacoes.map(c => " - " + c.nome + " - ")}
-                        </span>
-                         
-                    </div>
+        <div className="card-base especialidade-card-admin">
+                <div className="col-9 py-3">
+                   <h6>{atendimento.nome}</h6>
                          
                 </div>
-                <div className="col-3 pt-3 pr-5">
+                <div className="col-3 especialidade-card-btn">
                     <Link
-                    to={`/admin/medicos/${medico.id}`}
+                    to={`/admin/atendimento/${atendimento.id}`}
                     type="button"
-                    className="btn btn-outline-secondary btn-block border-radius-10 mb-3"
+                    className="btn btn-outline-secondary border-radius-10 mr-5"
                     >
                     EDITAR
                     </Link>
 
                     <button
                     type="button"
-                    className="btn btn-outline-danger btn-block border-radius-10"
-                    onClick={() => onRemove(medico.id)}
+                    className="btn btn-outline-danger border-radius-10"
+                    onClick={() => onRemove(atendimento.id)}
                     >
                     EXCLUIR
                     </button>

@@ -25,8 +25,8 @@ public class CidadeService {
 	private CidadeRepository repository;
 
 	@Transactional(readOnly = true)
-	public Page<CidadeDto> findAllPaged(PageRequest pageRequest) {
-		Page<Cidade> cidades = repository.findAll(pageRequest);
+	public Page<CidadeDto> findAllPaged(PageRequest pageRequest, String nome) {
+		Page<Cidade> cidades = repository.findNome(nome, pageRequest);
 		return CidadeDto.converter(cidades);
 	}
 

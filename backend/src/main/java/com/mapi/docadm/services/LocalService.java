@@ -25,8 +25,8 @@ public class LocalService {
 	private LocalRepository repository;
 	
 	@Transactional(readOnly = true)
-	public Page<LocalDto> findAllPaged(PageRequest pageRequest) {
-		Page<Local> locais = repository.findAll(pageRequest);
+	public Page<LocalDto> findAllPaged(PageRequest pageRequest, String nome) {
+		Page<Local> locais = repository.findNome(nome, pageRequest);
 		return LocalDto.converter(locais);
 	}
 	

@@ -1,20 +1,21 @@
-.medico-card-admin {
+.especialidade-card-admin {
     margin-bottom: 20px;
     border-radius: 10px;
     display: flex;
     flex-direction: row;
-}
-
-.medico-card-img-admin {
-    height: 100px;
-    width: 100px;
-    margin: 5px 10px;
+    max-width: 100%;
+    max-height: 50px;
 }
 
 .medico-card-name-admin {
     font-size: 18px;
     line-height: 25px;
     letter-spacing: -0.015em;
+}
+
+.especialidade-card-btn {
+    display: flex;
+    align-items: center;    
 }
 
 @media (max-width: 768px) {

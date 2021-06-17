@@ -11,7 +11,7 @@ import com.mapi.docadm.entities.Especialidade;
 @Repository
 public interface EspecialidadeRepository extends JpaRepository<Especialidade, Long> {
 	
-	@Query("SELECT obj FROM Especialidade obj WHERE(LOWER(obj.nome) LIKE LOWER(CONCAT('%',:nome,'%'))) ")
+	@Query("SELECT obj FROM Especialidade obj WHERE (LOWER(obj.nome) LIKE LOWER(CONCAT('%',:nome,'%'))) ")
 	Page<Especialidade> find(String nome, Pageable pageable);
 
 }

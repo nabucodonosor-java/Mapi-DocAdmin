@@ -30,6 +30,7 @@ public class CidadeController {
 
 	@GetMapping
 	public ResponseEntity<Page<CidadeDto>> findAll(
+			@RequestParam(value = "nome", defaultValue = "") String nome,
 			@RequestParam(value = "page", defaultValue = "0") Integer page,
 			@RequestParam(value = "linesPerPage", defaultValue = "12") Integer linesPerPage,
 			@RequestParam(value = "direction", defaultValue = "ASC") String direction,
@@ -37,7 +38,7 @@ public class CidadeController {
 		
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		
-		Page<CidadeDto> list = service.findAllPaged(pageRequest);
+		Page<CidadeDto> list = service.findAllPaged(pageRequest, nome.trim());
 		return ResponseEntity.ok().body(list);
 
 	}

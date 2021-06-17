@@ -4,10 +4,9 @@ import NavbarAdmin from './components/NavbarAdmin';
 import Medicos from './components/Medicos';
 import PrivateRoute from 'core/components/Routes/PrivateRoute';
 import Especialidade from './components/Especialidade';
-import Especializacao from './components/Especializacao';
-import Cidade from './components/Cidade';
 import Atendimento from './components/Atendimento';
-import Local from './components/Local';
+
+
 import './styles.scss';
 
 const Admin = () => (
@@ -22,16 +21,16 @@ const Admin = () => (
                     <Especialidade />
                 </PrivateRoute>
                 <PrivateRoute path="/admin/especializacao">
-                    <Especializacao />
+                    <h1>Especialização</h1>
                 </PrivateRoute>
                 <PrivateRoute path="/admin/cidade">
-                   <Cidade />
+                   <h1>Cidade</h1>
                 </PrivateRoute>
                 <PrivateRoute path="/admin/atendimento">
                    <Atendimento />
                 </PrivateRoute>
                 <PrivateRoute path="/admin/local">
-                   <Local />
+                   <h1>Local</h1>
                 </PrivateRoute>
                 <PrivateRoute path="/admin/users" allowedRoutes={['ROLE_ADMIN']}>
                     <h1>Users</h1>
