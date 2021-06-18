@@ -287,7 +287,7 @@ const Form = () => {
                                 options={locais}
                                 getOptionLabel={(option: Local) => option.nome}
                                 getOptionValue={(option: Local) => String(option.id)}
-                                classNamePrefix="especializacoes-select"
+                                classNamePrefix="locais-select"
                                 className="input-select mb-4"
                                 placeholder="Locais de Atendimento"
                                 inputId="locais"

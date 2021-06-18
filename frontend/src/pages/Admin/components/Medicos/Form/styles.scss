@@ -24,7 +24,7 @@
 }
 
 .select-atendimentos {
-    height: 100px;
+    height: 150px;
 }
 
 .admin-local-title {
@@ -40,11 +40,30 @@
     }
 }
 
+.select-locais {
+    height: 100px;
+}
+
 .especializacoes-select__control {
     height: 50px;
     border-radius: 10px !important;
     border: 1px solid #E1E1E1;
     font-weight: bold;
+}
+
+.locais-select__control {
+    height: 130px;
+    border-radius: 10px !important;
+    border: 1px solid #E1E1E1;
+    font-weight: bold;
+}
+
+.locais-select__indicator-separator {
+    display: none;
+}
+
+.locais-select__placeholder {
+    color: #9E9E9E; 
 }
  
 .especializacoes-select__indicator-separator {
