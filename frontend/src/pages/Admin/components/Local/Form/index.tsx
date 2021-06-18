@@ -58,10 +58,11 @@ const Form = () => {
     useEffect(() => {
         if (isEditing) {
             makePrivateRequest({ url: `/local/${localId}` })
-                .then(response => {
+                .then(response => { 
 
                 setValue('nome', response.data.nome);
-                setValue('cep', response.data.cep = searchValue);
+                setValue('searchValue', searchValue);
+                setValue('cep', response.data.cep);
                 setValue('logradouro', response.data.logradouro);
                 setValue('complemento', response.data.complemento);
                 setValue('bairro', response.data.bairro);
@@ -139,19 +140,34 @@ const Form = () => {
                     </div>
 
                     <div className="margin-bottom-30">
+
+                    <h6>Informações sobre Local de Visita</h6>
+                                <div className="d-flex mt-2">
+                                    <span className="admin-local-title mr-2">Busca CEP: </span>
+                                    <input
+                               
+                                        ref={register({required: false})}
+                                        name="searchValue"
+                                        type="text" 
+                                        className="form-control input-base input-busca-cep mr-2"
+                                        placeholder="Informe o CEP"
+                                        value={searchValue}
+                                        onChange={event => setSearchValue(event.target.value)}
+                                        id="searchValue"
+                                    />
+                                </div>
                         <div className="d-flex">
 
                         <input
                                
-                               ref={register({required: false})}
-                               name="cep"
-                               type="text" 
-                               className="form-control input-base input-cep mr-2"
-                               placeholder="CEP"
-                               value={searchValue}
-                               onChange={event => setSearchValue(event.target.value)}
-                               id="cep"
-                               />
+                                    ref={register({required: false})}
+                                    name="cep"
+                                    type="text" 
+                                    className="form-control input-base input-cep mr-2"
+                                    placeholder="CEP"
+                                    value={searchValue}
+                                    id="cep"
+                                    />
 
 
                             <input
