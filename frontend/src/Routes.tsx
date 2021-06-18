@@ -6,6 +6,7 @@ import Catalog from './pages/Catalog';
 import MedicoDetails from 'pages/Catalog/components/MedicoDetails';
 import Auth from 'pages/Auth';
 import Admin from './pages/Admin';
+import Report from './pages/Report';
 import history from './core/utils/history';
 
 const Routes = () => (
@@ -24,6 +25,10 @@ const Routes = () => (
             <Redirect from="/auth" to="/auth/login" exact/>
             <Route path="/auth">
                 <Auth />
+            </Route>
+            <Redirect from="/report" to="/report/medicos" exact/>
+            <Route path="/report">
+                <Report />
             </Route>
             <Redirect from="/admin" to="/admin/medicos" exact/>
             <Route path="/admin">

@@ -1,0 +1,17 @@
+.report-title {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 576px) {
+    .admin-div-btn {
+        display: flex;
+        flex-direction: column;
+    }
+    .admin-btn-add {
+        height: 50px;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}

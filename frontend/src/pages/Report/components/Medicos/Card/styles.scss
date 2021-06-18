@@ -1,0 +1,35 @@
+.medico-card-report {
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 5px 80px 5px 80px;
+}
+
+.medico-card-img-report {
+    height: 50px;
+    width: 50px;
+    margin: 5px 10px;
+}
+
+.report-card-medico-especializacoes {
+    max-height: 20px;
+}
+
+@media (max-width: 768px) {
+    .card-content {
+        margin-left: 10px;
+    }
+}
+
+@media (max-width: 576px) {
+    .card-content {
+        margin-left: 10px;
+    }
+
+    .medico-card-img-report {
+        height: 10px;
+        width: 10px;
+        margin: 5px 10px;
+    }
+}
