@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import List from './List';
 import ListEspecializacao from './ListEspecializacao';
 import ListAtendimento from './ListAtendimento';
+import ListLocal from './ListLocal';
 
 const Medicos = () => {
     return (
@@ -16,6 +17,9 @@ const Medicos = () => {
                </Route>
                <Route path="/report/atendimento" exact>
                     <ListAtendimento />
+               </Route>
+               <Route path="/report/local" exact>
+                    <ListLocal />
                </Route>
            </Switch>
        </div>

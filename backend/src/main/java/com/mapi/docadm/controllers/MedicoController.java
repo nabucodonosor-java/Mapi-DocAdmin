@@ -80,6 +80,38 @@ public class MedicoController {
 
 	}
 	
+	@GetMapping("/cidade")
+	public ResponseEntity<Page<MedicoDto>> findAllCidades(
+			@RequestParam(value = "cidadeId", defaultValue = "0") Long cidadeId,
+			@RequestParam(value = "nome", defaultValue = "") String nome,
+			@RequestParam(value = "page", defaultValue = "0") Integer page,
+			@RequestParam(value = "linesPerPage", defaultValue = "10") Integer linesPerPage,
+			@RequestParam(value = "direction", defaultValue = "ASC") String direction,
+			@RequestParam(value = "orderBy", defaultValue = "nome") String orderBy) {
+				
+		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
+		Page<MedicoDto> list = service.findAllPagedCidades(pageRequest, cidadeId, nome.trim());
+		
+		return ResponseEntity.ok().body(list);
+
+	}
+	
+	@GetMapping("/local")
+	public ResponseEntity<Page<MedicoDto>> findAllLocais(
+			@RequestParam(value = "localId", defaultValue = "0") Long localId,
+			@RequestParam(value = "nome", defaultValue = "") String nome,
+			@RequestParam(value = "page", defaultValue = "0") Integer page,
+			@RequestParam(value = "linesPerPage", defaultValue = "10") Integer linesPerPage,
+			@RequestParam(value = "direction", defaultValue = "ASC") String direction,
+			@RequestParam(value = "orderBy", defaultValue = "nome") String orderBy) {
+				
+		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
+		Page<MedicoDto> list = service.findAllPagedLocais(pageRequest, localId, nome.trim());
+		
+		return ResponseEntity.ok().body(list);
+
+	}
+	
 	@GetMapping("/{id}")
 	public ResponseEntity<MedicoDto> findById(@PathVariable Long id) {
 		MedicoDto entity = service.findById(id);
