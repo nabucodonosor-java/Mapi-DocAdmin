@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link, useHistory, useLocation } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { saveSessionData } from 'core/utils/auth';
 import { makeLogin } from 'core/utils/request';
 import AuthCard from '../AuthCard';
@@ -78,17 +78,8 @@ const Login = () => {
                         </div>
                     )}
                 </div>
-                <Link to="/auth/recover" className="login-link-recover">
-                    Esqueci a senha?
-                </Link>
                 <div className="login-submit">
                     <ButtonIcon text="logar" />
-                </div>
-                <div className="text-center">
-                    <span className="not-registered">Não tem cadastro?</span>
-                    <Link to="/auth/register" className="login-link-register">
-                        CADASTRAR
-                    </Link>
                 </div>
             </form>
         </AuthCard>

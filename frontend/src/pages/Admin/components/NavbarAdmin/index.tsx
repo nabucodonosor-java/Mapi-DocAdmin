@@ -1,6 +1,5 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { isAllowebByRole } from 'core/utils/auth';
 import './styles.scss';
 
 const NavbarAdmin = () => (
@@ -35,14 +34,7 @@ const NavbarAdmin = () => (
                 <NavLink to="/admin/local" className="admin-nav-admin-item">
                     Locais
                 </NavLink>
-            </li>
-            {isAllowebByRole(['ROLE_ADMIN']) && (
-                <li>
-                <NavLink to="/admin/users" className="admin-nav-admin-item">
-                    Usuários
-                </NavLink>
-            </li>
-            )}              
+            </li>             
         </ul>
     </nav>
 );

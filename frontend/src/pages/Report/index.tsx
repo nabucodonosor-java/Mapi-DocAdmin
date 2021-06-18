@@ -1,6 +1,6 @@
 import React from 'react';
 import { Switch } from 'react-router';
-import NavbarAdmin from './components/NavbarAdmin';
+import NavbarAdmin from './components/NavbarReport';
 import Medicos from './components/Medicos';
 import PrivateRoute from 'core/components/Routes/PrivateRoute';
 import './styles.scss';
@@ -24,9 +24,6 @@ const Report = () => (
                 </PrivateRoute>
                 <PrivateRoute path="/report/cidade">
                     <Medicos />
-                </PrivateRoute>
-                <PrivateRoute path="/report/users" allowedRoutes={['ROLE_ADMIN']}>
-                    <h1>Users</h1>
                 </PrivateRoute>
             </Switch>
         </div>

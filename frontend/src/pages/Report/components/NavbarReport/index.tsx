@@ -1,9 +1,8 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { isAllowebByRole } from 'core/utils/auth';
 import './styles.scss';
 
-const NavbarAdmin = () => (
+const NavbarReport = () => (
     <nav className="admin-nav-admin-container">
         <ul>
             <li>
@@ -30,16 +29,9 @@ const NavbarAdmin = () => (
                 <NavLink to="/report/local" className="admin-nav-admin-item">
                     Por Local
                 </NavLink>
-            </li>
-            {isAllowebByRole(['ROLE_ADMIN']) && (
-                <li>
-                <NavLink to="/report/users" className="admin-nav-admin-item">
-                    Usuários
-                </NavLink>
-            </li>
-            )}              
+            </li>             
         </ul>
     </nav>
 );
 
-export default NavbarAdmin;
+export default NavbarReport;
