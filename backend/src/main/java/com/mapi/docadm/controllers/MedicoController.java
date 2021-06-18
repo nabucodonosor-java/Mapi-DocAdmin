@@ -67,14 +67,14 @@ public class MedicoController {
 	@GetMapping("/atendimento")
 	public ResponseEntity<Page<MedicoDto>> findAllAtendimentos(
 			@RequestParam(value = "atendimentoId", defaultValue = "0") Long atendimentoId,
-			@RequestParam(value = "localidade", defaultValue = "") String localidade,
+			@RequestParam(value = "nome", defaultValue = "") String nome,
 			@RequestParam(value = "page", defaultValue = "0") Integer page,
 			@RequestParam(value = "linesPerPage", defaultValue = "10") Integer linesPerPage,
 			@RequestParam(value = "direction", defaultValue = "ASC") String direction,
 			@RequestParam(value = "orderBy", defaultValue = "nome") String orderBy) {
 				
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
-		Page<MedicoDto> list = service.findAllPagedAtendimentos(pageRequest, atendimentoId, localidade.trim());
+		Page<MedicoDto> list = service.findAllPagedAtendimentos(pageRequest, atendimentoId, nome.trim());
 		
 		return ResponseEntity.ok().body(list);
 

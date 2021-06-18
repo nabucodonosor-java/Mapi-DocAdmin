@@ -16,6 +16,12 @@
     max-height: 20px;
 }
 
+.report-list-especializacoes {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 @media (max-width: 768px) {
     .card-content {
         margin-left: 10px;

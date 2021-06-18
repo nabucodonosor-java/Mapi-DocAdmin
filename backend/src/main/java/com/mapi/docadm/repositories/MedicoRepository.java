@@ -36,8 +36,8 @@ public interface MedicoRepository extends JpaRepository<Medico, Long> {
 	
 	@Query("SELECT DISTINCT obj FROM Medico obj INNER JOIN obj.atendimentos atend WHERE "
 			+ "(COALESCE(:atendimentos) IS NULL OR atend IN :atendimentos) AND "
-			+ "(LOWER(obj.localidade) LIKE LOWER(CONCAT('%',:localidade,'%'))) ")
-	Page<Medico> findAtendimentos(List<Atendimento> atendimentos, String localidade, Pageable pageable);
+			+ "(LOWER(obj.nome) LIKE LOWER(CONCAT('%',:nome,'%'))) ")
+	Page<Medico> findAtendimentos(List<Atendimento> atendimentos, String nome, Pageable pageable);
 	
 	@Query("SELECT obj FROM Medico obj JOIN FETCH obj.atendimentos WHERE obj IN :medicos")
 	List<Medico> findAtendimentos(List<Medico> medicos);

@@ -77,9 +77,9 @@ public class MedicoService {
 	}
 	
 	@Transactional(readOnly = true)
-	public Page<MedicoDto> findAllPagedAtendimentos(PageRequest pageRequest, Long atendimentoId, String cidade) {
+	public Page<MedicoDto> findAllPagedAtendimentos(PageRequest pageRequest, Long atendimentoId, String nome) {
 		List<Atendimento> atendimentos = (atendimentoId == 0) ? null : Arrays.asList(atendimentoRepository.getOne(atendimentoId));
-		Page<Medico> page = repository.findAtendimentos(atendimentos, cidade, pageRequest);
+		Page<Medico> page = repository.findAtendimentos(atendimentos, nome, pageRequest);
 		repository.findAtendimentos(page.toList());
 		return page.map(x -> new MedicoDto(x, x.getEspecializacoes(), x.getEspecialidades(), x.getAtendimentos(), x.getCidades(), x.getLocais()));
 	}

@@ -10,21 +10,15 @@ const Card = ({ medico }: Props) => {
 
     return (
         <div className="card-base medico-card-report">
-            <div className="text-center border-right col-1">
+            <div className="text-center border-right">
                 <img src={medico.imgUrl}
                     alt={medico.nome} className="medico-card-img-report" />
             </div>
-            <div className="medico-card-report">
-                <h6 className="mr-2 col-3">{medico.especialidades.map(e => e.nome)}</h6>
-
-                <h6 className="card-content mr-2 col-9">{medico.nome}</h6>
-
-                <span className="badge rounded-pill bg-secondary ml-2 mr-2 report-card-medico-especializacoes">
-                        {medico?.especializacoes.map(c => " - " + c.nome + " - ")}
-                </span>
-
+            <div className="ml-2">
+                <h6 className="mb-2">Especialidade: {medico.especialidades.map(e => e.nome)}</h6>
+                
+            <h6 className="card-content">Nome: {medico.nome}</h6>
             </div>
-
         </div>
     )
 }
