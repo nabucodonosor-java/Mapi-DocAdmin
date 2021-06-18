@@ -93,7 +93,8 @@ const Form = () => {
             setValue('email', response.data.email);
             setValue('curriculo', response.data.curriculo);
             setValue('horarioAtendimento', response.data.horarioAtendimento);
-            setValue('cep', response.data.cep = searchValue);
+            setValue('searchValue', searchValue);
+            setValue('cep', response.data.cep);
             setValue('logradouro', response.data.logradouro);
             setValue('complemento', response.data.complemento);
             setValue('bairro', response.data.bairro); 
@@ -311,8 +312,21 @@ const Form = () => {
                                 isMulti
                                 />
 
-                                <h6 className="admin-local-title">Informações sobre local de visita</h6>
-
+                                <h6>Informações sobre Local de Visita</h6>
+                                <div className="d-flex mt-2">
+                                    <span className="admin-local-title mr-2">Busca CEP: </span>
+                                    <input
+                               
+                                        ref={register({required: false})}
+                                        name="searchValue"
+                                        type="text" 
+                                        className="form-control input-base input-busca-cep mr-2"
+                                        placeholder="Informe o CEP"
+                                        value={searchValue}
+                                        onChange={event => setSearchValue(event.target.value)}
+                                        id="searchValue"
+                                    />
+                                </div>        
                                <div className="d-flex">
                                
                                <input
@@ -323,7 +337,6 @@ const Form = () => {
                                     className="form-control input-base input-cep mr-2"
                                     placeholder="CEP"
                                     value={searchValue}
-                                    onChange={event => setSearchValue(event.target.value)}
                                     id="cep"
                                     />
 

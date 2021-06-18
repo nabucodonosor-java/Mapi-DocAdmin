@@ -23,7 +23,7 @@ const NavbarAdmin = () => (
             </li>
             <li>
                 <NavLink to="/report/cidade" className="admin-nav-admin-item">
-                    Por Endereço
+                    Por Cidade
                 </NavLink>
             </li>
             <li>

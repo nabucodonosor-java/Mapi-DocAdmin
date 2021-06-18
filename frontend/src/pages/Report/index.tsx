@@ -22,6 +22,9 @@ const Report = () => (
                 <PrivateRoute path="/report/local">
                     <Medicos />
                 </PrivateRoute>
+                <PrivateRoute path="/report/cidade">
+                    <Medicos />
+                </PrivateRoute>
                 <PrivateRoute path="/report/users" allowedRoutes={['ROLE_ADMIN']}>
                     <h1>Users</h1>
                 </PrivateRoute>

@@ -4,6 +4,7 @@ import List from './List';
 import ListEspecializacao from './ListEspecializacao';
 import ListAtendimento from './ListAtendimento';
 import ListLocal from './ListLocal';
+import ListCidade from './ListCidade';
 
 const Medicos = () => {
     return (
@@ -20,6 +21,9 @@ const Medicos = () => {
                </Route>
                <Route path="/report/local" exact>
                     <ListLocal />
+               </Route>
+               <Route path="/report/cidade" exact>
+                    <ListCidade />
                </Route>
            </Switch>
        </div>
