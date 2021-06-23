@@ -8,6 +8,7 @@ import Auth from 'pages/Auth';
 import Admin from './pages/Admin';
 import Report from './pages/Report';
 import history from './core/utils/history';
+import DashBoard from 'pages/DashBoard';
 
 const Routes = () => (
     <Router history={history}>
@@ -29,6 +30,10 @@ const Routes = () => (
             <Redirect from="/report" to="/report/medicos" exact/>
             <Route path="/report">
                 <Report />
+            </Route>
+            <Redirect from="/dashboard" to="/dashboard/servicos" exact/>
+            <Route path="/dashboard">
+                <DashBoard />
             </Route>
             <Redirect from="/admin" to="/admin/medicos" exact/>
             <Route path="/admin">

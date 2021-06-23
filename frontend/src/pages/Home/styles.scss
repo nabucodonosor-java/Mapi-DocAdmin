@@ -26,7 +26,12 @@
     color: #9E9E9E;
     margin-top: 30px;
     margin-bottom: 40px;
-    text-align: justify;
+    display: flex;
+    justify-content: left;
+}
+
+.btn-search {
+    justify-content: center;
 }
 
 .main-image {

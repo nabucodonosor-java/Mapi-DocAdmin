@@ -9,7 +9,7 @@ type LoginData = {
 
 // const BASE_URL = process.env.REACT_APP_BACKEND_URL ?? 'https://app-doc-admin.herokuapp.com';
 
-const BASE_URL = 'https://doc-admin.herokuapp.com';
+export const BASE_URL = 'https://doc-admin.herokuapp.com';
 
 axios.interceptors.response.use(function(response) {
     return response;

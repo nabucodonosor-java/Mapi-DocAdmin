@@ -1,0 +1,24 @@
+.admin-container {
+    display: flex;
+}
+
+.admin-content {
+    padding: 25px 40px 45px 40px;
+    flex: 1;
+}
+
+.admin-list-container {
+    margin: 45px 0;
+}
+
+@media (max-width: 768px) {
+    .admin-container {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 576px) {
+    .admin-container {
+        flex-direction: column;
+    }
+}
