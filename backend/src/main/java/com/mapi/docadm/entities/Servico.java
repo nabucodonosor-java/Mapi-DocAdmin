@@ -30,6 +30,17 @@ public class Servico implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "funcionario_id")
 	private Funcionario funcionario;
+	
+	public Servico() {}
+	
+	public Servico(Integer qtdeServico, Integer qtdeFinalizado, LocalDate date, String descricao,
+			Funcionario funcionario) {
+		this.qtdeServico = qtdeServico;
+		this.qtdeFinalizado = qtdeFinalizado;
+		this.date = date;
+		this.descricao = descricao;
+		this.funcionario = funcionario;
+	}
 
 	public Long getId() {
 		return id;

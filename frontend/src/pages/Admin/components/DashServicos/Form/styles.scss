@@ -1,0 +1,94 @@
+.input-select {
+    width: 100%;
+}
+
+.input-crm {
+    margin-right: 8px;
+    max-width: 150px;
+}
+
+.input-celular {
+    max-width: 150px;
+}
+
+.input-cep {
+    max-width: 100px;
+}
+
+.input-busca-cep {
+    max-width: 150px;
+}
+
+.input-complemento {
+    max-width: 80px;
+}
+
+.input-uf {
+    max-width: 50px;
+}
+
+.select-atendimentos {
+    height: 150px;
+}
+
+.admin-local-title {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.medicos-descricoes {
+
+    label {
+        margin-bottom: 10px;
+        font-size: 24px;
+    }
+}
+
+.select-locais {
+    height: 100px;
+}
+
+.especializacoes-select__control {
+    height: 50px;
+    border-radius: 10px !important;
+    border: 1px solid #E1E1E1;
+    font-weight: bold;
+}
+
+.locais-select__control {
+    height: 130px;
+    border-radius: 10px !important;
+    border: 1px solid #E1E1E1;
+    font-weight: bold;
+}
+
+.locais-select__indicator-separator {
+    display: none;
+}
+
+.locais-select__placeholder {
+    color: #9E9E9E; 
+}
+ 
+.especializacoes-select__indicator-separator {
+    display: none;
+}
+
+.especializacoes-select__placeholder {
+    color: #9E9E9E; 
+}
+
+.atendimentos-select__control {
+    height: 150px;
+    border-radius: 10px !important;
+    border: 1px solid #E1E1E1;
+    font-weight: bold;
+}
+ 
+.atendimentos-select__indicator-separator {
+    display: none;
+}
+
+.atendimentos-select__placeholder {
+    color: #9E9E9E; 
+}

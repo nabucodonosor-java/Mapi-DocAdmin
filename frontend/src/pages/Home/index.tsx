@@ -5,7 +5,8 @@ import './styles.scss';
 
 const Home = () => (
     <div className="home-container">
-        <div className="home-content card-base border-radius-20">
+       
+        <div className="home-content card-base border-radius-20">       
             <div className="home-text">
                 <h1 className="text-title">
                     Base de Médicos

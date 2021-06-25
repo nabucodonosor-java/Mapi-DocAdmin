@@ -10,6 +10,8 @@ import Cidade from './components/Cidade';
 import Local from './components/Local';
 
 import './styles.scss';
+import DashServicos from './components/DashServicos';
+
 
 const Admin = () => (
     <div className="admin-container">
@@ -33,6 +35,9 @@ const Admin = () => (
                 </PrivateRoute>
                 <PrivateRoute path="/admin/local">
                    <Local />
+                </PrivateRoute>
+                <PrivateRoute path="/admin/servico">
+                   <DashServicos />
                 </PrivateRoute>
                 <PrivateRoute path="/admin/users" allowedRoutes={['ROLE_ADMIN']}>
                     <h1>Users</h1>

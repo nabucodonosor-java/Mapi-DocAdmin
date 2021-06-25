@@ -1,16 +1,16 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Form from './Form';
-import List from './List'; 
+import List from './List';
 
-const Local = () => {
+const DashServicos = () => {
     return (
        <div>
            <Switch>
-               <Route path="/admin/local" exact>
+               <Route path="/admin/servico" exact>
                     <List />
                </Route>
-               <Route path="/admin/local/:localId">
+               <Route path="/admin/servico/:servicoId">
                     <Form />
                </Route>
            </Switch>
@@ -18,4 +18,4 @@ const Local = () => {
     );
 }
 
-export default Local;
+export default DashServicos;

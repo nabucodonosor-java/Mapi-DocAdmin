@@ -1,5 +1,10 @@
 import { Funcionario } from './Funcionario';
 
+export type ServicoResponse = {
+    content: Servico[];
+    totalPages: number;
+}
+
 export type Servico = {
     id: number;
     qtdeServico: number;

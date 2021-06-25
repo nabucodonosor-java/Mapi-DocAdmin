@@ -34,7 +34,12 @@ const NavbarAdmin = () => (
                 <NavLink to="/admin/local" className="admin-nav-admin-item">
                     Locais
                 </NavLink>
-            </li>             
+            </li>
+            <li>
+                <NavLink to="/admin/servico" className="admin-nav-admin-item">
+                    Serviços
+                </NavLink>
+            </li>           
         </ul>
     </nav>
 );

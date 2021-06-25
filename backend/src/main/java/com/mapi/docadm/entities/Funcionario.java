@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.mapi.docadm.dto.FuncionarioDto;
+
 @Entity
 @Table(name = "tb_funcionario")
 public class Funcionario implements Serializable {
@@ -23,6 +25,13 @@ public class Funcionario implements Serializable {
 
 	@OneToMany(mappedBy = "funcionario")
 	private List<Servico> servicos = new ArrayList<>();
+	
+	public Funcionario() {}
+
+	public Funcionario(FuncionarioDto funcionario) {
+		id = funcionario.getId();
+		nome = funcionario.getNome();
+	}
 
 	public Long getId() {
 		return id;
@@ -36,7 +45,7 @@ public class Funcionario implements Serializable {
 		return nome;
 	}
 
-	public void setName(String nome) {
+	public void setNome(String nome) {
 		this.nome = nome;
 	}
 	

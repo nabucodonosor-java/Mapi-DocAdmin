@@ -19,7 +19,7 @@ const List = () => {
     const getCidades = useCallback(() => {
         const params = {
             page: activePage,
-            linesPerPage: 20,
+            linesPerPage: 5,
             direction: 'ASC',
             orderBy: 'nome',
             nome
