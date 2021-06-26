@@ -1,4 +1,4 @@
-# Big Game Survey 
+# Doc Administrator
 [![NPM](https://img.shields.io/npm/l/react)](https://github.com/nabucodonosor-java/Mapi-DocAdmin/blob/main/LICENSE) 
 
 # Sobre o projeto
