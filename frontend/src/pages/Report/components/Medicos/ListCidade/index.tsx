@@ -2,7 +2,6 @@ import React, { useState, useCallback, useEffect } from 'react';
 import { Cidade, MedicoResponse } from 'core/types/Medico';
 import { makePrivateRequest } from 'core/utils/request';
 import CardLoader from '../Loaders/MedicoCardLoader';
-import Card from '../Card';
 import Pagination from 'core/components/Pagination';
 import MedicosCidadeFilters  from 'core/components/Filters/MedicosCidadeFilters';
 import './styles.scss';
@@ -65,10 +64,31 @@ const ListCidade = () => {
             </div>
             
             <div className="admin-list-container">
-                {isLoading ? <CardLoader /> : (
-                    medicoResponse?.content.map(medico => (
-                        <Card medico={medico} key={medico.id} />
-                    ))
+            {isLoading ? <CardLoader /> : (
+                    <div className="table-responsive">
+                    <table className="table table-striped table-sm">
+                        <thead>
+                            <tr>
+                                <th>Especialidade</th>
+                                <th>CRM</th>
+                                <th>Nome</th>
+                                <th>Especializações</th>
+                                <th>Cidades de Atuação</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {medicoResponse?.content.map(item => (
+                                <tr key={item.id}>
+                                    <td>{item.especialidades.map(e => e.nome)}</td>
+                                    <td>{item.crm}</td>
+                                    <td>{item.nome}</td>
+                                    <td>{item.especializacoes.map(e => e.nome + "  ")}</td>
+                                    <td>{item.cidades.map(c =>c.nome + "  ")}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
                 )}
                 {medicoResponse && (
                 <Pagination 
