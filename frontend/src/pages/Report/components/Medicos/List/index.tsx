@@ -2,7 +2,6 @@ import React, { useState, useCallback, useEffect } from 'react';
 import { Especialidade, MedicoResponse } from 'core/types/Medico';
 import { makePrivateRequest } from 'core/utils/request';
 import CardLoader from '../Loaders/MedicoCardLoader';
-import Card from '../Card';
 import Pagination from 'core/components/Pagination';
 import MedicosFilters  from 'core/components/Filters/MedicosFilters';
 import './styles.scss';
@@ -17,14 +16,14 @@ const List = () => {
     const getMedicos = useCallback(() => {
         const params = {
             page: activePage,
-            linesPerPage: 20,
+            linesPerPage: 10,
             direction: 'ASC',
             orderBy: 'nome',
             nome,
             especialidadeId: especialidade?.id
         }
         setIsLoading(true);
-        makePrivateRequest({ url: '/medicos', params })
+        makePrivateRequest({ url: `/medicos?page=${activePage}`, params })
        .then(response => setMedicoResponse(response.data))
        .finally(() => {
         setIsLoading(false);
@@ -66,9 +65,30 @@ const List = () => {
             
             <div className="admin-list-container">
                 {isLoading ? <CardLoader /> : (
-                    medicoResponse?.content.map(medico => (
-                        <Card medico={medico} key={medico.id} />
-                    ))
+                    <div className="table-responsive">
+                    <table className="table table-striped table-sm">
+                        <thead>
+                            <tr>
+                                <th>Especialidade</th>
+                                <th>CRM</th>
+                                <th>Nome</th>
+                                <th>Especializações</th>
+                                <th>Dias de Atendimento</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {medicoResponse?.content.map(item => (
+                                <tr key={item.id}>
+                                    <td>{item.especialidades.map(e => e.nome)}</td>
+                                    <td>{item.crm}</td>
+                                    <td>{item.nome}</td>
+                                    <td>{item.especializacoes.map(e => e.nome)}</td>
+                                    <td>{item.atendimentos.map(a => a.nome + " ")}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
                 )}
                 {medicoResponse && (
                 <Pagination 

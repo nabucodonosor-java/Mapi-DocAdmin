@@ -104,7 +104,7 @@ const Form = () => {
                                 name="nome"
                                 type="text"
                                 className="form-control input-base"
-                                placeholder="Nome do médico"
+                                placeholder="Nome do local"
                             />
                             {errors.nome && (
                                 <div className="invalid-feedback d-block">
