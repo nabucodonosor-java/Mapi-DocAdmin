@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import ButtonIcon from 'core/components/ButtonIcon';
 import { Link } from 'react-router-dom';
-import { makePrivateRequest } from 'core/utils/request';
+import { makeRequest } from 'core/utils/request';
 import './styles.scss';
 import HomeLoader from './components/HomeLoader';
 
@@ -11,7 +11,7 @@ const Home = () => {
 
     useEffect(() => {
         setIsLoading(true);
-        makePrivateRequest({ url: '/' })
+        makeRequest({ url: '/' })
             .then(response => response.data)
             .finally(() => setIsLoading(false));
     }, []);
