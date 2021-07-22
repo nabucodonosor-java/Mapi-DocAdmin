@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 import CardLoader from '../Loaders/MedicoCardLoader';
 import Card from '../Card';
 import Pagination from 'core/components/Pagination';
-import MedicosFilters  from 'core/components/Filters/MedicosFilters';
+import MedicosFilters from 'core/components/Filters/MedicosFilters';
 import './styles.scss';
 
 const List = () => {
@@ -28,16 +28,16 @@ const List = () => {
         }
         setIsLoading(true);
         makePrivateRequest({ url: '/medicos', params })
-       .then(response => setMedicoResponse(response.data))
-       .finally(() => {
-        setIsLoading(false);
-       })
+            .then(response => setMedicoResponse(response.data))
+            .finally(() => {
+                setIsLoading(false);
+            })
     }, [activePage, nome, especialidade]);
 
     useEffect(() => {
-        getMedicos();    
+        getMedicos();
     }, [getMedicos]);
-    
+
     const handleChangeName = (name: string) => {
         setActivePage(0);
         setNome(name);
@@ -54,8 +54,8 @@ const List = () => {
         setNome('');
     }
 
-    const handleCreate = () => { 
-        history.push('/admin/medicos/create'); 
+    const handleCreate = () => {
+        history.push('/admin/medicos/create');
     }
 
     const onRemove = (medicoId: number) => {
@@ -63,13 +63,13 @@ const List = () => {
 
         if (confirm) {
             makePrivateRequest({ url: `/medicos/${medicoId}`, method: 'DELETE' })
-            .then(() => {
-                toast.info('Médico deletado com sucesso!');
-                getMedicos();
-            })
-            .catch(() => {
-                toast.error('Erro ao deletar médico');
-            })
+                .then(() => {
+                    toast.info('Médico deletado com sucesso!');
+                    getMedicos();
+                })
+                .catch(() => {
+                    toast.error('Erro ao deletar médico');
+                })
         }
     }
 
@@ -85,9 +85,9 @@ const List = () => {
                     handleChangeEspecialidade={handleChangeEspecialidade}
                     handleChangeName={handleChangeName}
                     clearFilters={clearFilters}
-                    />
+                />
             </div>
-            
+
             <div className="admin-list-container">
                 {isLoading ? <CardLoader /> : (
                     medicoResponse?.content.map(medico => (
@@ -95,12 +95,11 @@ const List = () => {
                     ))
                 )}
                 {medicoResponse && (
-                <Pagination 
-                totalPages={medicoResponse.totalPages}
-                activePage={activePage}
-                onChange={page => setActivePage(page)}
-                />
-            )}             
+                    <Pagination
+                        totalPages={medicoResponse.totalPages}
+                        onChange={page => setActivePage(page)}
+                    />
+                )}
             </div>
         </div>
     )

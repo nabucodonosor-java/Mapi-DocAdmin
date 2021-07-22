@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 import CardLoader from '../Loaders/MedicoCardLoader';
 import Card from '../Card';
 import Pagination from 'core/components/Pagination';
-import LocalFilters  from 'core/components/Filters/LocalFilters';
+import LocalFilters from 'core/components/Filters/LocalFilters';
 import './styles.scss';
 
 const List = () => {
@@ -26,16 +26,16 @@ const List = () => {
         }
         setIsLoading(true);
         makePrivateRequest({ url: '/local', params })
-       .then(response => setLocalResponse(response.data))
-       .finally(() => {
-        setIsLoading(false);
-       })
+            .then(response => setLocalResponse(response.data))
+            .finally(() => {
+                setIsLoading(false);
+            })
     }, [activePage, nome]);
 
     useEffect(() => {
-        getLocais();    
+        getLocais();
     }, [getLocais]);
-    
+
     const handleChangeName = (name: string) => {
         setActivePage(0);
         setNome(name);
@@ -46,8 +46,8 @@ const List = () => {
         setNome('');
     }
 
-    const handleCreate = () => { 
-        history.push('/admin/local/create'); 
+    const handleCreate = () => {
+        history.push('/admin/local/create');
     }
 
     const onRemove = (localId: number) => {
@@ -55,13 +55,13 @@ const List = () => {
 
         if (confirm) {
             makePrivateRequest({ url: `/local/${localId}`, method: 'DELETE' })
-            .then(() => {
-                toast.info('Local deletado com sucesso!');
-                getLocais();
-            })
-            .catch(() => {
-                toast.error('Erro ao deletar local');
-            })
+                .then(() => {
+                    toast.info('Local deletado com sucesso!');
+                    getLocais();
+                })
+                .catch(() => {
+                    toast.error('Erro ao deletar local');
+                })
         }
     }
 
@@ -75,9 +75,9 @@ const List = () => {
                     nome={nome}
                     handleChangeName={handleChangeName}
                     clearFilters={clearFilters}
-                    />
+                />
             </div>
-            
+
             <div className="admin-list-container">
                 {isLoading ? <CardLoader /> : (
                     localResponse?.content.map(local => (
@@ -85,12 +85,11 @@ const List = () => {
                     ))
                 )}
                 {localResponse && (
-                <Pagination 
-                totalPages={localResponse.totalPages}
-                activePage={activePage}
-                onChange={page => setActivePage(page)}
-                />
-            )}             
+                    <Pagination
+                        totalPages={localResponse.totalPages}
+                        onChange={page => setActivePage(page)}
+                    />
+                )}
             </div>
         </div>
     )

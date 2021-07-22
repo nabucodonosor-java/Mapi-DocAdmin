@@ -70,7 +70,6 @@ const List = () => {
                 {servicoResponse && (
                 <Pagination 
                 totalPages={servicoResponse.totalPages}
-                activePage={activePage}
                 onChange={page => setActivePage(page)}
                 />
             )}             

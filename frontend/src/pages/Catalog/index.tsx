@@ -17,7 +17,7 @@ const Catalog = () => {
     const [especialidade, setEspecialidade] = useState<Especialidade>();
 
     const getMedicos = useCallback(() => {
-        const params = { 
+        const params = {
             page: activePage,
             linesPerPage: 15,
             nome,
@@ -26,10 +26,10 @@ const Catalog = () => {
 
         setIsLoading(true);
         makePrivateRequest({ url: '/medicos', params })
-       .then(response => setMedicoResponse(response.data))
-       .finally(() => {
-        setIsLoading(false);
-       })
+            .then(response => setMedicoResponse(response.data))
+            .finally(() => {
+                setIsLoading(false);
+            })
     }, [activePage, nome, especialidade]);
 
     useEffect(() => {
@@ -55,29 +55,28 @@ const Catalog = () => {
     return (
         <div className="catalog-container">
             <div className="catalog-filter-container">
-               
+
                 <MedicoFilters
                     nome={nome}
                     especialidade={especialidade}
                     handleChangeEspecialidade={handleChangeEspecialidade}
                     handleChangeName={handleChangeName}
                     clearFilters={clearFilters}
-                    />
+                />
             </div>
             <div className="catalog-medicos">
                 {isLoading ? <MedicoCardLoader /> : (
                     medicoResponse?.content.map(medico => (
                         <Link to={`/medicos/${medico.id}`} key={medico.id}>
-                            <MedicoCard medico={medico}/>
-                        </Link> 
-                     ))
-                )}           
+                            <MedicoCard medico={medico} />
+                        </Link>
+                    ))
+                )}
             </div>
             {medicoResponse && (
-                <Pagination 
-                totalPages={medicoResponse.totalPages}
-                activePage={activePage}
-                onChange={page => setActivePage(page)}
+                <Pagination
+                    totalPages={medicoResponse.totalPages}
+                    onChange={page => setActivePage(page)}
                 />
             )}
         </div>

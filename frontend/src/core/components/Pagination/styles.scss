@@ -3,10 +3,14 @@
     justify-content: center;
     align-items: center;
     margin-top: 35px;
+
+    a:focus {
+        outline: none;
+    }
 }
 
 .pagination-item {
-    width: 40px;
+    width: 40px; 
     height: 40px;
     background: #E1E1E1;
     border-radius: 50%;
@@ -22,7 +26,11 @@
     margin-right: 10px;
 
     &.active {
-        background: #407BFF;
+        background: #2d769a;
+    }
+
+    &:hover {
+        color: #FFF;
     }
 }
 
@@ -37,7 +45,7 @@
 }
 
 .page-active {
-    color: #407BFF;
+    color: #2d769a;
     cursor: pointer; 
 }
 
@@ -45,4 +53,8 @@
     color: #E1E1E1;
     cursor: pointer;
     pointer-events: none;
+}
+
+.pagination {
+    align-items: center;
 }

@@ -5,15 +5,14 @@ import './styles.scss';
 
 type Props = {
     totalPages: number;
-    activePage: number;
     onChange: (item: number) => void;
 }
 
-const Pagination = ({ totalPages, activePage, onChange }: Props) => {
-    const renderIcon = () => (
+const Pagination = ({ totalPages, onChange }: Props) => {
+    const renderIcon = (type: 'previous' | 'next') => (
         <ArrowIcon
-            className={`pagination-previous`}
-            data-testid="arrow-icon-previous"
+            className={`pagination-${type}`}
+            data-testid={`arrow-icon-${type}`}
         />
     );
 
@@ -24,6 +23,15 @@ const Pagination = ({ totalPages, activePage, onChange }: Props) => {
             pageRangeDisplayed={5}
             marginPagesDisplayed={1}
             onPageChange={selectedItem => onChange(selectedItem.selected)}
+            previousLabel={renderIcon('previous')}
+            nextLabel={renderIcon('next')}
+            containerClassName="pagination"
+            pageLinkClassName="pagination-item"
+            breakClassName="pagination-item"
+            activeLinkClassName="active"
+            previousClassName="page-active"
+            nextClassName="page-active"
+            disabledClassName="page-inactive"
            /> 
            
         </div>

@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 import CardLoader from '../Loaders/MedicoCardLoader';
 import Card from '../Card';
 import Pagination from 'core/components/Pagination';
-import EspecializacaoFilters  from 'core/components/Filters/EspecializacaoFilters';
+import EspecializacaoFilters from 'core/components/Filters/EspecializacaoFilters';
 import './styles.scss';
 
 const List = () => {
@@ -26,16 +26,16 @@ const List = () => {
         }
         setIsLoading(true);
         makePrivateRequest({ url: '/especializacao', params })
-       .then(response => setEspecializacaoResponse(response.data))
-       .finally(() => {
-        setIsLoading(false);
-       })
+            .then(response => setEspecializacaoResponse(response.data))
+            .finally(() => {
+                setIsLoading(false);
+            })
     }, [activePage, nome]);
 
     useEffect(() => {
-        getEspecializacoes();    
+        getEspecializacoes();
     }, [getEspecializacoes]);
-    
+
     const handleChangeName = (name: string) => {
         setActivePage(0);
         setNome(name);
@@ -46,8 +46,8 @@ const List = () => {
         setNome('');
     }
 
-    const handleCreate = () => { 
-        history.push('/admin/especializacao/create'); 
+    const handleCreate = () => {
+        history.push('/admin/especializacao/create');
     }
 
     const onRemove = (especializacaoId: number) => {
@@ -55,13 +55,13 @@ const List = () => {
 
         if (confirm) {
             makePrivateRequest({ url: `/especializacao/${especializacaoId}`, method: 'DELETE' })
-            .then(() => {
-                toast.info('Especialização deletada com sucesso!');
-                getEspecializacoes();
-            })
-            .catch(() => {
-                toast.error('Erro ao deletar especialização');
-            })
+                .then(() => {
+                    toast.info('Especialização deletada com sucesso!');
+                    getEspecializacoes();
+                })
+                .catch(() => {
+                    toast.error('Erro ao deletar especialização');
+                })
         }
     }
 
@@ -73,12 +73,12 @@ const List = () => {
                 </button>
 
                 <EspecializacaoFilters
-                nome={nome}
-                handleChangeName={handleChangeName}
-                clearFilters={clearFilters}
+                    nome={nome}
+                    handleChangeName={handleChangeName}
+                    clearFilters={clearFilters}
                 />
             </div>
-            
+
             <div className="admin-list-container">
                 {isLoading ? <CardLoader /> : (
                     especializacaoResponse?.content.map(especializacao => (
@@ -86,12 +86,12 @@ const List = () => {
                     ))
                 )}
                 {especializacaoResponse && (
-                <Pagination 
-                totalPages={especializacaoResponse.totalPages}
-                activePage={activePage}
-                onChange={page => setActivePage(page)}
-                />
-            )}             
+                    <Pagination
+                        totalPages={especializacaoResponse.totalPages}
+
+                        onChange={page => setActivePage(page)}
+                    />
+                )}
             </div>
         </div>
     )
